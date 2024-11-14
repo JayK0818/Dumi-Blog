@@ -2,6 +2,6 @@ import { defineConfig } from 'dumi';
 
 export default defineConfig({
   themeConfig: {
-    name: '',
+    name: '牧童的博客',
   },
 });
