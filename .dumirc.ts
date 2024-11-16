@@ -12,8 +12,11 @@ export default defineConfig({
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         title: 'NodeJS',
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 =======
@@ -29,6 +32,9 @@ export default defineConfig({
         title: 'Node',
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -41,10 +47,17 @@ export default defineConfig({
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     nprogress: true,
     showLineNum: true
   },
   base: '/',
+=======
+    showLineNum: true, // 是否在代码块中展示行号
+    nprogress: true, //
+    base: './'
+  },
+>>>>>>> Stashed changes
 =======
     showLineNum: true, // 是否在代码块中展示行号
     nprogress: true, //
