@@ -26,9 +26,16 @@
   "devDependencies": {
     "@commitlint/cli": "^17.1.2",
     "@commitlint/config-conventional": "^17.1.0",
+    "@dumijs/preset-vue": "^2.4.12",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
     "dumi": "^2.3.0",
+    "dumi-theme-antd-style": "^0.31.1",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1"
+  },
+  "dependencies": {
+    "vue": "^3.5.13"
   }
 }
