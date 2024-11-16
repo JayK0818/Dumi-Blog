@@ -9,8 +9,23 @@ importers:
   .:
     dependencies:
       vue:
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
         specifier: ^3.5.13
         version: 3.5.13(typescript@5.6.3)
+=======
+        specifier: ^3.5.12
+        version: 3.5.12(typescript@5.6.3)
+>>>>>>> Stashed changes
+=======
+        specifier: ^3.5.12
+        version: 3.5.12(typescript@5.6.3)
+>>>>>>> Stashed changes
+=======
+        specifier: ^3.5.12
+        version: 3.5.12(typescript@5.6.3)
+>>>>>>> Stashed changes
     devDependencies:
       '@commitlint/cli':
         specifier: ^17.1.2
@@ -20,6 +35,9 @@ importers:
         version: 17.8.1
       '@dumijs/preset-vue':
         specifier: ^2.4.12
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
         version: 2.4.12(dumi@2.4.13(@babel/core@7.25.8)(@swc/helpers@0.5.1)(@types/node@20.5.1)(@types/react@18.3.12)(eslint@8.57.1)(lightningcss@1.22.1)(prettier@2.8.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@3.29.5)(stylelint@14.16.1)(terser@5.36.0)(type-fest@1.4.0)(typescript@5.6.3)(webpack@5.95.0(@swc/core@1.4.2(@swc/helpers@0.5.1))))(type-fest@1.4.0)(typescript@5.6.3)(vue@3.5.13(typescript@5.6.3))(webpack@5.95.0(@swc/core@1.4.2(@swc/helpers@0.5.1)))
       '@types/react':
         specifier: ^18.3.12
@@ -27,6 +45,15 @@ importers:
       '@types/react-dom':
         specifier: ^18.3.1
         version: 18.3.1
+=======
+        version: 2.4.12(dumi@2.4.13(@babel/core@7.25.8)(@swc/helpers@0.5.1)(@types/node@20.5.1)(eslint@8.57.1)(lightningcss@1.22.1)(prettier@2.8.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@3.29.5)(stylelint@14.16.1)(terser@5.36.0)(type-fest@1.4.0)(typescript@5.6.3)(webpack@5.95.0(@swc/core@1.4.2(@swc/helpers@0.5.1))))(type-fest@1.4.0)(typescript@5.6.3)(vue@3.5.12(typescript@5.6.3))(webpack@5.95.0(@swc/core@1.4.2(@swc/helpers@0.5.1)))
+>>>>>>> Stashed changes
+=======
+        version: 2.4.12(dumi@2.4.13(@babel/core@7.25.8)(@swc/helpers@0.5.1)(@types/node@20.5.1)(eslint@8.57.1)(lightningcss@1.22.1)(prettier@2.8.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@3.29.5)(stylelint@14.16.1)(terser@5.36.0)(type-fest@1.4.0)(typescript@5.6.3)(webpack@5.95.0(@swc/core@1.4.2(@swc/helpers@0.5.1))))(type-fest@1.4.0)(typescript@5.6.3)(vue@3.5.12(typescript@5.6.3))(webpack@5.95.0(@swc/core@1.4.2(@swc/helpers@0.5.1)))
+>>>>>>> Stashed changes
+=======
+        version: 2.4.12(dumi@2.4.13(@babel/core@7.25.8)(@swc/helpers@0.5.1)(@types/node@20.5.1)(eslint@8.57.1)(lightningcss@1.22.1)(prettier@2.8.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@3.29.5)(stylelint@14.16.1)(terser@5.36.0)(type-fest@1.4.0)(typescript@5.6.3)(webpack@5.95.0(@swc/core@1.4.2(@swc/helpers@0.5.1))))(type-fest@1.4.0)(typescript@5.6.3)(vue@3.5.12(typescript@5.6.3))(webpack@5.95.0(@swc/core@1.4.2(@swc/helpers@0.5.1)))
+>>>>>>> Stashed changes
       dumi:
         specifier: ^2.3.0
         version: 2.4.13(@babel/core@7.25.8)(@swc/helpers@0.5.1)(@types/node@20.5.1)(@types/react@18.3.12)(eslint@8.57.1)(lightningcss@1.22.1)(prettier@2.8.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@3.29.5)(stylelint@14.16.1)(terser@5.36.0)(type-fest@1.4.0)(typescript@5.6.3)(webpack@5.95.0(@swc/core@1.4.2(@swc/helpers@0.5.1)))
@@ -425,10 +452,19 @@ packages:
     peerDependencies:
       postcss-selector-parser: ^6.0.10
 
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
   '@ctrl/tinycolor@3.6.1':
     resolution: {integrity: sha512-SITSV6aIXsuVNV3f3O0f2n/cgyEDWoSqtZMYiAmcsYHydcKrOz3gUxB/iXd/Qf08+IZX4KpgNbvUdMBmWz+kcA==}
     engines: {node: '>=10'}
 
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
   '@dumijs/preset-vue@2.4.12':
     resolution: {integrity: sha512-R6iy/Zb9iJXcm34WBApbYTfPVehTytISMpt+ZmJXgDliL53wjqrdUG4jffm9ZX0DmV0tJpBktQqI0bVvshXVWw==}
     peerDependencies:
@@ -443,6 +479,9 @@ packages:
       typescript:
         optional: true
 
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
   '@emotion/babel-plugin@11.12.0':
     resolution: {integrity: sha512-y2WQb+oP8Jqvvclh8Q55gLUyb7UFvgv7eJfsj7td5TToBrIUtPay2kMrZi4xjq9qw2vD0ZR5fSho0yqoFgX7Rw==}
 
@@ -493,6 +532,12 @@ packages:
   '@emotion/weak-memoize@0.4.0':
     resolution: {integrity: sha512-snKqtPW01tN0ui7yu9rGv69aJXr/a/Ywvl11sUjNtEcRc+ng/mQriFL0wLXMef74iHa/EkftbDzU9F8iFbH+zg==}
 
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
   '@esbuild-kit/cjs-loader@2.4.4':
     resolution: {integrity: sha512-NfsJX4PdzhwSkfJukczyUiZGc7zNNWZcEAyqeISpDnn0PTfzMJR1aR8xAIPskBejIxBJbIgCCMzbaYa9SXepIg==}
 
@@ -1836,6 +1881,9 @@ packages:
   '@volar/typescript@1.11.1':
     resolution: {integrity: sha512-iU+t2mas/4lYierSnoFOeRFQUhAEMgsFuQxoxvwn5EdQopw43j+J27a4lt9LMInx1gLJBC6qL14WYGlgymaSMQ==}
 
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
   '@vue/compiler-core@3.5.13':
     resolution: {integrity: sha512-oOdAkwqUfW1WqpwSYJce06wvt6HljgY3fGeM9NcVA1HaYOij3mZG9Rkysn0OHuyUAGMbEbARIpsG+LPVlBJ5/Q==}
 
@@ -1847,6 +1895,29 @@ packages:
 
   '@vue/compiler-ssr@3.5.13':
     resolution: {integrity: sha512-wMH6vrYHxQl/IybKJagqbquvxpWCuVYpoUJfCqFZwa/JY1GdATAQ+TgVtgrwwMZ0D07QhA99rs/EAAWfvG6KpA==}
+=======
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+  '@vue/compiler-core@3.5.12':
+    resolution: {integrity: sha512-ISyBTRMmMYagUxhcpyEH0hpXRd/KqDU4ymofPgl2XAkY9ZhQ+h0ovEZJIiPop13UmR/54oA2cgMDjgroRelaEw==}
+
+  '@vue/compiler-dom@3.5.12':
+    resolution: {integrity: sha512-9G6PbJ03uwxLHKQ3P42cMTi85lDRvGLB2rSGOiQqtXELat6uI4n8cNz9yjfVHRPIu+MsK6TE418Giruvgptckg==}
+
+  '@vue/compiler-sfc@3.5.12':
+    resolution: {integrity: sha512-2k973OGo2JuAa5+ZlekuQJtitI5CgLMOwgl94BzMCsKZCX/xiqzJYzapl4opFogKHqwJk34vfsaKpfEhd1k5nw==}
+
+  '@vue/compiler-ssr@3.5.12':
+    resolution: {integrity: sha512-eLwc7v6bfGBSM7wZOGPmRavSWzNFF6+PdRhE+VFJhNCgHiF8AM7ccoqcv5kBXA2eWUfigD7byekvf/JsOfKvPA==}
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 
   '@vue/language-core@1.8.27':
     resolution: {integrity: sha512-L8Kc27VdQserNaCUNiSFdDl9LWT24ly8Hpwf1ECy3aFb9m6bDhBGQYOujDm21N7EW3moKIOKEanQwe1q5BK+mA==}
@@ -1856,6 +1927,9 @@ packages:
       typescript:
         optional: true
 
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
   '@vue/reactivity@3.5.13':
     resolution: {integrity: sha512-NaCwtw8o48B9I6L1zl2p41OHo/2Z4wqYGGIK1Khu5T7yxrn+ATOixn/Udn2m+6kZKB/J7cuT9DbWWhRxqixACg==}
 
@@ -1872,6 +1946,34 @@ packages:
 
   '@vue/shared@3.5.13':
     resolution: {integrity: sha512-/hnE/qP5ZoGpol0a5mDi45bOd7t3tjYJBjsgCsivow7D48cJeV5l05RD82lPqi7gRiphZM37rnhW1l6ZoCNNnQ==}
+=======
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+  '@vue/reactivity@3.5.12':
+    resolution: {integrity: sha512-UzaN3Da7xnJXdz4Okb/BGbAaomRHc3RdoWqTzlvd9+WBR5m3J39J1fGcHes7U3za0ruYn/iYy/a1euhMEHvTAg==}
+
+  '@vue/runtime-core@3.5.12':
+    resolution: {integrity: sha512-hrMUYV6tpocr3TL3Ad8DqxOdpDe4zuQY4HPY3X/VRh+L2myQO8MFXPAMarIOSGNu0bFAjh1yBkMPXZBqCk62Uw==}
+
+  '@vue/runtime-dom@3.5.12':
+    resolution: {integrity: sha512-q8VFxR9A2MRfBr6/55Q3umyoN7ya836FzRXajPB6/Vvuv0zOPL+qltd9rIMzG/DbRLAIlREmnLsplEF/kotXKA==}
+
+  '@vue/server-renderer@3.5.12':
+    resolution: {integrity: sha512-I3QoeDDeEPZm8yR28JtY+rk880Oqmj43hreIBVTicisFTx/Dl7JpG72g/X7YF8hnQD3IFhkky5i2bPonwrTVPg==}
+    peerDependencies:
+      vue: 3.5.12
+
+  '@vue/shared@3.5.12':
+    resolution: {integrity: sha512-L2RPSAwUFbgZH20etwrXyVyCBu9OxRSi8T/38QsvnkJyvq2LufW2lDCOzm7t/U9C1mkhJGWYfCuFBCmIuNivrg==}
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 
   '@webassemblyjs/ast@1.12.1':
     resolution: {integrity: sha512-EKfMUOPRRUTy5UII4qJDGPpqfwjOmZ5jeGFwid9mnoqIFK+e0vqoi1qH56JpmZSzEL53jKnNzScdmftJyG5xWg==}
@@ -2553,9 +2655,18 @@ packages:
     resolution: {integrity: sha512-jaSIDzP9pZVS4ZfQ+TzvtiWhdpFhE2RDHz8QJkpX9SIpLq88VueF5jJw6t+6CUQcAoA6t+x89MLrWAqpfDE8iQ==}
     engines: {node: '>= 0.8.0'}
 
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
   compute-scroll-into-view@3.1.0:
     resolution: {integrity: sha512-rj8l8pD4bJ1nx+dAkMhV1xB5RuZEyVysfxJqB1pRchh1KVvwOv9b7CGB8ZfjTImVv2oF+sYMUkMZq6Na5Ftmbg==}
 
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
   computeds@0.0.1:
     resolution: {integrity: sha512-7CEBgcMjVmitjYo5q8JTJVra6X5mQ20uTThdK+0kR7UEaDrAWEQcRiBtWJzga4eRpP6afNwwLsX2SET2JhVB1Q==}
 
@@ -2797,9 +2908,18 @@ packages:
     resolution: {integrity: sha512-NeDFuUPV1YCpCn8MUIcDk1QnuyenUHs7f4Q5P0n9FFA0neKFrfEH9esR+YMW95BplbYfdmjbs0Pl/ZGAaM2QHQ==}
     engines: {node: '>= 8'}
 
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
   dayjs@1.11.13:
     resolution: {integrity: sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg==}
 
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
   de-indent@1.0.2:
     resolution: {integrity: sha512-e/1zu3xH5MQryN2zdVaF0OrdNLUbvWxzMbi+iNA6Bky7l1RoP8a2fIbRocyHclXt/arDrrR6lL3TqFD9pMQTsg==}
 
@@ -3230,7 +3350,6 @@ packages:
   eslint@8.57.1:
     resolution: {integrity: sha512-ypowyDxpVSYpkXr9WPv2PAZCtNip1Mv5KTW0SCurXv/9iOpcrH9PaqUElksqEB6pChqHGDRCFTyrZlGhnLNGiA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
-    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
 
   espree@9.6.1:
@@ -7285,8 +7404,23 @@ packages:
   vue-template-compiler@2.7.16:
     resolution: {integrity: sha512-AYbUWAJHLGGQM7+cNTELw+KsOG9nl2CnSv467WobS5Cv9uk3wFcnr1Etsz2sEIHEZvw1U+o9mRlEO6QbZvUPGQ==}
 
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
   vue@3.5.13:
     resolution: {integrity: sha512-wmeiSMxkZCSc+PM2w2VRsOYAZC8GdipNFRTsLSfodVqI9mbejKeXEGr8SckuLnrQPGe3oJN5c3K0vpoU9q/wCQ==}
+=======
+  vue@3.5.12:
+    resolution: {integrity: sha512-CLVZtXtn2ItBIi/zHZ0Sg1Xkb7+PU32bJJ8Bmy7ts3jxXTcbfsEfBivFYYWz1Hur+lalqGAh65Coin0r+HRUfg==}
+>>>>>>> Stashed changes
+=======
+  vue@3.5.12:
+    resolution: {integrity: sha512-CLVZtXtn2ItBIi/zHZ0Sg1Xkb7+PU32bJJ8Bmy7ts3jxXTcbfsEfBivFYYWz1Hur+lalqGAh65Coin0r+HRUfg==}
+>>>>>>> Stashed changes
+=======
+  vue@3.5.12:
+    resolution: {integrity: sha512-CLVZtXtn2ItBIi/zHZ0Sg1Xkb7+PU32bJJ8Bmy7ts3jxXTcbfsEfBivFYYWz1Hur+lalqGAh65Coin0r+HRUfg==}
+>>>>>>> Stashed changes
     peerDependencies:
       typescript: '*'
     peerDependenciesMeta:
@@ -7976,19 +8110,24 @@ snapshots:
     dependencies:
       postcss-selector-parser: 6.1.2
 
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
   '@ctrl/tinycolor@3.6.1': {}
-
-  '@dumijs/preset-vue@2.4.12(dumi@2.4.13(@babel/core@7.25.8)(@swc/helpers@0.5.1)(@types/node@20.5.1)(@types/react@18.3.12)(eslint@8.57.1)(lightningcss@1.22.1)(prettier@2.8.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@3.29.5)(stylelint@14.16.1)(terser@5.36.0)(type-fest@1.4.0)(typescript@5.6.3)(webpack@5.95.0(@swc/core@1.4.2(@swc/helpers@0.5.1))))(type-fest@1.4.0)(typescript@5.6.3)(vue@3.5.13(typescript@5.6.3))(webpack@5.95.0(@swc/core@1.4.2(@swc/helpers@0.5.1)))':
+=======
+  '@dumijs/preset-vue@2.4.12(dumi@2.4.13(@babel/core@7.25.8)(@swc/helpers@0.5.1)(@types/node@20.5.1)(eslint@8.57.1)(lightningcss@1.22.1)(prettier@2.8.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@3.29.5)(stylelint@14.16.1)(terser@5.36.0)(type-fest@1.4.0)(typescript@5.6.3)(webpack@5.95.0(@swc/core@1.4.2(@swc/helpers@0.5.1))))(type-fest@1.4.0)(typescript@5.6.3)(vue@3.5.12(typescript@5.6.3))(webpack@5.95.0(@swc/core@1.4.2(@swc/helpers@0.5.1)))':
+=======
+  '@dumijs/preset-vue@2.4.12(dumi@2.4.13(@babel/core@7.25.8)(@swc/helpers@0.5.1)(@types/node@20.5.1)(eslint@8.57.1)(lightningcss@1.22.1)(prettier@2.8.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@3.29.5)(stylelint@14.16.1)(terser@5.36.0)(type-fest@1.4.0)(typescript@5.6.3)(webpack@5.95.0(@swc/core@1.4.2(@swc/helpers@0.5.1))))(type-fest@1.4.0)(typescript@5.6.3)(vue@3.5.12(typescript@5.6.3))(webpack@5.95.0(@swc/core@1.4.2(@swc/helpers@0.5.1)))':
     dependencies:
       '@dumijs/vue-meta': 1.0.0(typescript@5.6.3)
       '@types/hash-sum': 1.0.2
       '@umijs/bundler-webpack': 4.3.27(type-fest@1.4.0)(typescript@5.6.3)(webpack@5.95.0(@swc/core@1.4.2(@swc/helpers@0.5.1)))
       codesandbox-import-utils: 2.2.3
       compare-versions: 6.1.1
-      dumi: 2.4.13(@babel/core@7.25.8)(@swc/helpers@0.5.1)(@types/node@20.5.1)(@types/react@18.3.12)(eslint@8.57.1)(lightningcss@1.22.1)(prettier@2.8.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@3.29.5)(stylelint@14.16.1)(terser@5.36.0)(type-fest@1.4.0)(typescript@5.6.3)(webpack@5.95.0(@swc/core@1.4.2(@swc/helpers@0.5.1)))
+      dumi: 2.4.13(@babel/core@7.25.8)(@swc/helpers@0.5.1)(@types/node@20.5.1)(eslint@8.57.1)(lightningcss@1.22.1)(prettier@2.8.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@3.29.5)(stylelint@14.16.1)(terser@5.36.0)(type-fest@1.4.0)(typescript@5.6.3)(webpack@5.95.0(@swc/core@1.4.2(@swc/helpers@0.5.1)))
       hash-sum: 2.0.0
-      vue: 3.5.13(typescript@5.6.3)
-      vue-loader: 17.4.2(vue@3.5.13(typescript@5.6.3))(webpack@5.95.0(@swc/core@1.4.2(@swc/helpers@0.5.1)))
+      vue: 3.5.12(typescript@5.6.3)
+      vue-loader: 17.4.2(vue@3.5.12(typescript@5.6.3))(webpack@5.95.0(@swc/core@1.4.2(@swc/helpers@0.5.1)))
     transitivePeerDependencies:
       - '@types/webpack'
       - '@vue/compiler-sfc'
@@ -8011,6 +8150,90 @@ snapshots:
     optionalDependencies:
       typescript: 5.6.3
 
+  '@esbuild-kit/cjs-loader@2.4.4':
+>>>>>>> Stashed changes
+    dependencies:
+      '@dumijs/vue-meta': 1.0.0(typescript@5.6.3)
+      '@types/hash-sum': 1.0.2
+      '@umijs/bundler-webpack': 4.3.27(type-fest@1.4.0)(typescript@5.6.3)(webpack@5.95.0(@swc/core@1.4.2(@swc/helpers@0.5.1)))
+      codesandbox-import-utils: 2.2.3
+      compare-versions: 6.1.1
+      dumi: 2.4.13(@babel/core@7.25.8)(@swc/helpers@0.5.1)(@types/node@20.5.1)(eslint@8.57.1)(lightningcss@1.22.1)(prettier@2.8.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@3.29.5)(stylelint@14.16.1)(terser@5.36.0)(type-fest@1.4.0)(typescript@5.6.3)(webpack@5.95.0(@swc/core@1.4.2(@swc/helpers@0.5.1)))
+      hash-sum: 2.0.0
+      vue: 3.5.12(typescript@5.6.3)
+      vue-loader: 17.4.2(vue@3.5.12(typescript@5.6.3))(webpack@5.95.0(@swc/core@1.4.2(@swc/helpers@0.5.1)))
+    transitivePeerDependencies:
+      - '@types/webpack'
+      - '@vue/compiler-sfc'
+      - sockjs-client
+      - supports-color
+      - type-fest
+      - typescript
+      - webpack
+      - webpack-dev-server
+      - webpack-hot-middleware
+      - webpack-plugin-serve
+
+  '@dumijs/vue-meta@1.0.0(typescript@5.6.3)':
+    dependencies:
+      '@volar/typescript': 1.11.1
+      '@vue/language-core': 1.8.27(typescript@5.6.3)
+      dumi-assets-types: 2.3.0
+      typesafe-path: 0.2.2
+      vue-component-type-helpers: 1.8.27
+    optionalDependencies:
+      typescript: 5.6.3
+
+  '@esbuild-kit/cjs-loader@2.4.4':
+    dependencies:
+      '@esbuild-kit/core-utils': 3.3.2
+      get-tsconfig: 4.8.1
+>>>>>>> Stashed changes
+
+  '@dumijs/preset-vue@2.4.12(dumi@2.4.13(@babel/core@7.25.8)(@swc/helpers@0.5.1)(@types/node@20.5.1)(@types/react@18.3.12)(eslint@8.57.1)(lightningcss@1.22.1)(prettier@2.8.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@3.29.5)(stylelint@14.16.1)(terser@5.36.0)(type-fest@1.4.0)(typescript@5.6.3)(webpack@5.95.0(@swc/core@1.4.2(@swc/helpers@0.5.1))))(type-fest@1.4.0)(typescript@5.6.3)(vue@3.5.13(typescript@5.6.3))(webpack@5.95.0(@swc/core@1.4.2(@swc/helpers@0.5.1)))':
+=======
+  '@dumijs/preset-vue@2.4.12(dumi@2.4.13(@babel/core@7.25.8)(@swc/helpers@0.5.1)(@types/node@20.5.1)(eslint@8.57.1)(lightningcss@1.22.1)(prettier@2.8.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@3.29.5)(stylelint@14.16.1)(terser@5.36.0)(type-fest@1.4.0)(typescript@5.6.3)(webpack@5.95.0(@swc/core@1.4.2(@swc/helpers@0.5.1))))(type-fest@1.4.0)(typescript@5.6.3)(vue@3.5.12(typescript@5.6.3))(webpack@5.95.0(@swc/core@1.4.2(@swc/helpers@0.5.1)))':
+>>>>>>> Stashed changes
+    dependencies:
+      '@dumijs/vue-meta': 1.0.0(typescript@5.6.3)
+      '@types/hash-sum': 1.0.2
+      '@umijs/bundler-webpack': 4.3.27(type-fest@1.4.0)(typescript@5.6.3)(webpack@5.95.0(@swc/core@1.4.2(@swc/helpers@0.5.1)))
+      codesandbox-import-utils: 2.2.3
+      compare-versions: 6.1.1
+<<<<<<< Updated upstream
+      dumi: 2.4.13(@babel/core@7.25.8)(@swc/helpers@0.5.1)(@types/node@20.5.1)(@types/react@18.3.12)(eslint@8.57.1)(lightningcss@1.22.1)(prettier@2.8.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@3.29.5)(stylelint@14.16.1)(terser@5.36.0)(type-fest@1.4.0)(typescript@5.6.3)(webpack@5.95.0(@swc/core@1.4.2(@swc/helpers@0.5.1)))
+      hash-sum: 2.0.0
+      vue: 3.5.13(typescript@5.6.3)
+      vue-loader: 17.4.2(vue@3.5.13(typescript@5.6.3))(webpack@5.95.0(@swc/core@1.4.2(@swc/helpers@0.5.1)))
+=======
+      dumi: 2.4.13(@babel/core@7.25.8)(@swc/helpers@0.5.1)(@types/node@20.5.1)(eslint@8.57.1)(lightningcss@1.22.1)(prettier@2.8.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@3.29.5)(stylelint@14.16.1)(terser@5.36.0)(type-fest@1.4.0)(typescript@5.6.3)(webpack@5.95.0(@swc/core@1.4.2(@swc/helpers@0.5.1)))
+      hash-sum: 2.0.0
+      vue: 3.5.12(typescript@5.6.3)
+      vue-loader: 17.4.2(vue@3.5.12(typescript@5.6.3))(webpack@5.95.0(@swc/core@1.4.2(@swc/helpers@0.5.1)))
+>>>>>>> Stashed changes
+    transitivePeerDependencies:
+      - '@types/webpack'
+      - '@vue/compiler-sfc'
+      - sockjs-client
+      - supports-color
+      - type-fest
+      - typescript
+      - webpack
+      - webpack-dev-server
+      - webpack-hot-middleware
+      - webpack-plugin-serve
+
+  '@dumijs/vue-meta@1.0.0(typescript@5.6.3)':
+    dependencies:
+      '@volar/typescript': 1.11.1
+      '@vue/language-core': 1.8.27(typescript@5.6.3)
+      dumi-assets-types: 2.3.0
+      typesafe-path: 0.2.2
+      vue-component-type-helpers: 1.8.27
+    optionalDependencies:
+      typescript: 5.6.3
+
+<<<<<<< Updated upstream
   '@emotion/babel-plugin@11.12.0':
     dependencies:
       '@babel/helper-module-imports': 7.25.7
@@ -8089,6 +8312,8 @@ snapshots:
 
   '@emotion/weak-memoize@0.4.0': {}
 
+=======
+>>>>>>> Stashed changes
   '@esbuild-kit/cjs-loader@2.4.4':
     dependencies:
       '@esbuild-kit/core-utils': 3.3.2
@@ -9524,14 +9749,36 @@ snapshots:
       '@volar/language-core': 1.11.1
       path-browserify: 1.0.1
 
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
   '@vue/compiler-core@3.5.13':
     dependencies:
       '@babel/parser': 7.25.8
       '@vue/shared': 3.5.13
+=======
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+  '@vue/compiler-core@3.5.12':
+    dependencies:
+      '@babel/parser': 7.25.8
+      '@vue/shared': 3.5.12
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
       entities: 4.5.0
       estree-walker: 2.0.2
       source-map-js: 1.2.1
 
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
   '@vue/compiler-dom@3.5.13':
     dependencies:
       '@vue/compiler-core': 3.5.13
@@ -9553,13 +9800,61 @@ snapshots:
     dependencies:
       '@vue/compiler-dom': 3.5.13
       '@vue/shared': 3.5.13
+=======
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+  '@vue/compiler-dom@3.5.12':
+    dependencies:
+      '@vue/compiler-core': 3.5.12
+      '@vue/shared': 3.5.12
+
+  '@vue/compiler-sfc@3.5.12':
+    dependencies:
+      '@babel/parser': 7.25.8
+      '@vue/compiler-core': 3.5.12
+      '@vue/compiler-dom': 3.5.12
+      '@vue/compiler-ssr': 3.5.12
+      '@vue/shared': 3.5.12
+      estree-walker: 2.0.2
+      magic-string: 0.30.12
+      postcss: 8.4.47
+      source-map-js: 1.2.1
+
+  '@vue/compiler-ssr@3.5.12':
+    dependencies:
+      '@vue/compiler-dom': 3.5.12
+      '@vue/shared': 3.5.12
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 
   '@vue/language-core@1.8.27(typescript@5.6.3)':
     dependencies:
       '@volar/language-core': 1.11.1
       '@volar/source-map': 1.11.1
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
       '@vue/compiler-dom': 3.5.13
       '@vue/shared': 3.5.13
+=======
+      '@vue/compiler-dom': 3.5.12
+      '@vue/shared': 3.5.12
+>>>>>>> Stashed changes
+=======
+      '@vue/compiler-dom': 3.5.12
+      '@vue/shared': 3.5.12
+>>>>>>> Stashed changes
+=======
+      '@vue/compiler-dom': 3.5.12
+      '@vue/shared': 3.5.12
+>>>>>>> Stashed changes
       computeds: 0.0.1
       minimatch: 9.0.5
       muggle-string: 0.3.1
@@ -9568,6 +9863,9 @@ snapshots:
     optionalDependencies:
       typescript: 5.6.3
 
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
   '@vue/reactivity@3.5.13':
     dependencies:
       '@vue/shared': 3.5.13
@@ -9591,6 +9889,41 @@ snapshots:
       vue: 3.5.13(typescript@5.6.3)
 
   '@vue/shared@3.5.13': {}
+=======
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+  '@vue/reactivity@3.5.12':
+    dependencies:
+      '@vue/shared': 3.5.12
+
+  '@vue/runtime-core@3.5.12':
+    dependencies:
+      '@vue/reactivity': 3.5.12
+      '@vue/shared': 3.5.12
+
+  '@vue/runtime-dom@3.5.12':
+    dependencies:
+      '@vue/reactivity': 3.5.12
+      '@vue/runtime-core': 3.5.12
+      '@vue/shared': 3.5.12
+      csstype: 3.1.3
+
+  '@vue/server-renderer@3.5.12(vue@3.5.12(typescript@5.6.3))':
+    dependencies:
+      '@vue/compiler-ssr': 3.5.12
+      '@vue/shared': 3.5.12
+      vue: 3.5.12(typescript@5.6.3)
+
+  '@vue/shared@3.5.12': {}
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 
   '@webassemblyjs/ast@1.12.1':
     dependencies:
@@ -10507,8 +10840,17 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
   compute-scroll-into-view@3.1.0: {}
 
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
   computeds@0.0.1: {}
 
   concat-map@0.0.1: {}
@@ -10782,8 +11124,17 @@ snapshots:
       image-size: 0.8.3
       mimer: 1.1.0
 
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
   dayjs@1.11.13: {}
 
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
   de-indent@1.0.2: {}
 
   debug@2.6.9:
@@ -16299,20 +16650,47 @@ snapshots:
 
   vue-component-type-helpers@1.8.27: {}
 
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
   vue-loader@17.4.2(vue@3.5.13(typescript@5.6.3))(webpack@5.95.0(@swc/core@1.4.2(@swc/helpers@0.5.1))):
+=======
+  vue-loader@17.4.2(vue@3.5.12(typescript@5.6.3))(webpack@5.95.0(@swc/core@1.4.2(@swc/helpers@0.5.1))):
+>>>>>>> Stashed changes
+=======
+  vue-loader@17.4.2(vue@3.5.12(typescript@5.6.3))(webpack@5.95.0(@swc/core@1.4.2(@swc/helpers@0.5.1))):
+>>>>>>> Stashed changes
+=======
+  vue-loader@17.4.2(vue@3.5.12(typescript@5.6.3))(webpack@5.95.0(@swc/core@1.4.2(@swc/helpers@0.5.1))):
+>>>>>>> Stashed changes
     dependencies:
       chalk: 4.1.2
       hash-sum: 2.0.0
       watchpack: 2.4.2
       webpack: 5.95.0(@swc/core@1.4.2(@swc/helpers@0.5.1))
     optionalDependencies:
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
       vue: 3.5.13(typescript@5.6.3)
+=======
+      vue: 3.5.12(typescript@5.6.3)
+>>>>>>> Stashed changes
+=======
+      vue: 3.5.12(typescript@5.6.3)
+>>>>>>> Stashed changes
+=======
+      vue: 3.5.12(typescript@5.6.3)
+>>>>>>> Stashed changes
 
   vue-template-compiler@2.7.16:
     dependencies:
       de-indent: 1.0.2
       he: 1.2.0
 
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
   vue@3.5.13(typescript@5.6.3):
     dependencies:
       '@vue/compiler-dom': 3.5.13
@@ -16320,6 +16698,25 @@ snapshots:
       '@vue/runtime-dom': 3.5.13
       '@vue/server-renderer': 3.5.13(vue@3.5.13(typescript@5.6.3))
       '@vue/shared': 3.5.13
+=======
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+  vue@3.5.12(typescript@5.6.3):
+    dependencies:
+      '@vue/compiler-dom': 3.5.12
+      '@vue/compiler-sfc': 3.5.12
+      '@vue/runtime-dom': 3.5.12
+      '@vue/server-renderer': 3.5.12(vue@3.5.12(typescript@5.6.3))
+      '@vue/shared': 3.5.12
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
     optionalDependencies:
       typescript: 5.6.3
 
