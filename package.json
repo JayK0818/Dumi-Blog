@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "dumi-blog",
   "version": "0.0.1",
   "description": "A static site based on dumi",
   "scripts": {
@@ -27,43 +27,16 @@
     "@commitlint/cli": "^17.1.2",
     "@commitlint/config-conventional": "^17.1.0",
     "@dumijs/preset-vue": "^2.4.12",
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
     "dumi": "^2.3.0",
+    "dumi-plugin-color-chunk": "^1.1.2",
     "dumi-theme-antd-style": "^0.31.1",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1"
   },
   "dependencies": {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
     "vue": "^3.5.13"
-=======
-    "vue": "^3.5.12"
->>>>>>> Stashed changes
-=======
-    "vue": "^3.5.12"
->>>>>>> Stashed changes
-=======
-    "vue": "^3.5.12"
->>>>>>> Stashed changes
-=======
-    "vue": "^3.5.12"
->>>>>>> Stashed changes
   }
 }
