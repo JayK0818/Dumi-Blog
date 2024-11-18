@@ -1,5 +1,5 @@
 ---
-title: Dotenv
+title: dotenv
 group:
   title: Package
 ---
@@ -53,6 +53,25 @@ console.log(result);
  *    }
  * }
  */
+
+const dotenv = require('dotenv')
+dotenv.config()
+// process.env now has the keys and values you defined in your .env file.
+console.log(process.env)
+
+// --------- parsing ----------
+const buf = Buffer.from('BASIC=basic')
+const config = dotenv.parse(buf)
+console.log(typeof config, config) // object { BASIC : 'basic' }
+
+// 配置路径
+require('dotenv').config({
+  path: path.resolve(process.cww(), '.env')
+})
+// 多个环境变量路径
+require('dotenv').config({
+  path: ['.env', '.env.production']
+})
 ```
 
 ## Parsing
