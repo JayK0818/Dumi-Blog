@@ -366,6 +366,13 @@ app.use(
     },
     secret: process.env.SESSION_SECRET,
     resave: false,
+    /**
+     * Force the session to be saved back to the session store, even if the session was never
+    modified during the request
+    */
+    rolling: false,
+    // Force the session identifier cookie to be set on every response.
+    // The expiration is reset to the original maxAge
     saveUninitialized: false,
     store: mongoStore.create({ // 存储session
       autoRemove: 'interval',

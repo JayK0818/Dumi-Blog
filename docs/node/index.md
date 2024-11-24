@@ -2,7 +2,7 @@
 nav: Node
 ---
 
-# Node.js
+# NodeJs
 
 单线程 异步非阻塞 IO 配合事件回调通知(主线程是单线程)
 
@@ -62,9 +62,9 @@ npm config get registry (获取当前的镜像源)
 
 主版本号.次要版本.修订号
 
-1.  主版本号: 做了不兼容的 API 修改
-2.  次版本: 做了向下兼容的功能性新增
-3.  修订号: 向下兼容的问题修正
+1. 主版本号: 做了不兼容的 API 修改
+2. 次版本: 做了向下兼容的功能性新增
+3. 修订号: 向下兼容的问题修正
 
 ## Modules
 
@@ -72,8 +72,8 @@ A module is any file or directory in the _node_modules_ directory that can be lo
 
 To be loaded by the Node.js _require()_ function, a module must be one of the following:
 
-1.  A folder with a **package.json** file containing a **main** field.
-2.  A JavaScript file.
+1. A folder with a **package.json** file containing a **main** field.
+2. A JavaScript file.
 
 ## Login
 
