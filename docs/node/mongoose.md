@@ -1,8 +1,8 @@
 ---
-title: Mongoose
+nav: Node
 ---
 
-### Mongoose
+# Mongoose
 
   Mongoose is a MongoDB object modeling tool designed to work in asynchronous environment.
 
@@ -29,7 +29,7 @@ mongoose.connection.on('disconnecting', () => console.log('disconnecting'));
 mongoose.connection.on('close', () => console.log('close'));
 ```
 
-#### Schema
+## Schema
 
   Each schema maps to a MongoDB collection and defines the shape of the documents within that collection.
 
@@ -112,7 +112,7 @@ const doc = new Blog()
 doc._id instanceof mongoose.Types.ObjectId
 ```
 
-#### Statics
+## Statics
 
   You can also add static functions to your model.
 
@@ -138,7 +138,7 @@ animalSchema.statics.findByName = function(name) {
 animalSchema.static('findByBreed', function(breed) { return this.find({ breed }); })
 ```
 
-#### SchemeType
+## SchemeType
 
 - String
 - Number
@@ -229,18 +229,34 @@ const schema = new mongoose.Schema({
 })
 ```
 
+## Subdocuments
+
   Subdocuments are documents embedded in other documents. Mongoose has two distinct notions of subdocuments:
   array of subdocuments and single nested subdocuments.
 
 ```js
 const childSchema = new Schema({
-  name: String
+  name: String,
+  // 设置默认值
+  age: {
+    type: Number,
+    default: 0
+  }
 })
 
 const parentSchema = new Schema({
   children: [childSchema],
   child: childSchema
 })
+
+// finding a subdocument
+const doc = parent.children.id(_id)
+
+// create a subdocument by using create() method
+const doc = parent.children.create({ name: 'Hello' })
+
+// remove subdocument
+parent.children.id(_id).deleteOne()
 ```
 
   Note that populated documents are not subdocuments in Mongoose. Subdocuments are similar to normal documents.
@@ -255,7 +271,21 @@ parent.children[0].name = 'Matthew';
 await parent.save()
 ```
 
-#### Model
+  Each subdocument has an *_id* by default.
+  Sometimes, you need to get the parent of a subdocument, You can access the parent using the **parent()** function.
+
+```js
+const schema = new Schema({
+  doc: [{ name: String }]
+});
+const Model = mongoose.model('Test', schema)
+const doc = new Model({
+  doc: [{ name: 'hello' }]
+})
+doc.doc[0].parent();
+```
+
+## Model
 
 ```js
 const userSchema = new mongoose.Schema({
@@ -299,7 +329,7 @@ userModel.watch().on('change', () => {
 
   **ObjectId** is a class, and ObjectIds are objects, When you convert an ObjectId to a string, using toString()
 
-#### Queries
+## Queries
 
 - Model.deleteMany()
 - Model.deleteOne()

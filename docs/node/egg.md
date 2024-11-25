@@ -17,7 +17,8 @@ pnpm add egg-bin --save-dev
 ```json
 {
   "scripts": {
-    "dev": "egg-bin dev"
+    "dev": "egg-bin dev",
+    "start": "egg-bin dev --port 9000"
   }
 }
 ```
@@ -124,9 +125,15 @@ class UserController extends Controller {
         min: 18
       }
     })
+    // 调用service
+    await ctx.service.user.create(ctx.request.body)
   }
 }
 ```
+
+1. Service不是单例, 它是请求级别的对象。框架在每次请求中初次访问 **ctx.service.xxx**时才进行实例化。
+2. 一个Service文件仅包含一个类, 该类通过 **module.exports** 导出
+3. Service文件必须放在 **app/service**目录下。
 
 ### Response
 
@@ -176,6 +183,19 @@ module.exports = app => {
 }
 ```
 
+## Service
+
+  Service就是在复杂业务场景下做业务逻辑封装的一个抽象层, 抽象出的Service可以被多个Controller重复使用。
+
+```js
+const Service = require('egg').Service
+class UserService extends Service {
+  async find(id) {
+    const user = await this.ctx.db.query(id)
+  }
+}
+```
+
 ## Config
 
   Egg奉行 *约定优于配置*
@@ -219,14 +239,48 @@ module.exports = (app) => {
 ```js
 // config.default.js
 module.exports = {
-  cookies: {
-    httpOnly: false,
-    sameSite: strict
-  }
-  // session配置
-  key: 'EGG_SECRET',
-  maxAge: 86400000
+  keys: 'key1, key2',   // cookie密钥
 }
+```
+
+## 异常处理
+
+  在app/middleware 目录下创建一个 **error_handler.js**文件, 创建一个中间件
+
+```js
+module.exports = () => {
+ return async function errorHandler(ctx, next) {
+  try {
+   await next()
+  } catch (err) {
+   // 所有的异常都会触发 app 上的一个 error 事件，框架会记录一条错误日志
+   ctx.app.emit('error', err, ctx)
+
+   const status = err.status || 500
+   // 在生产环境中，500 错误的详细内容不返回给客户端，因为可能含有敏感信息
+   const error =
+    status === 500 && ctx.app.config.env === 'prod'
+     ? 'Internal Server Error'
+     : Array.isArray(err.errors)
+     ? err.errors.map((item) => item.message).join('/n')
+     : err?.message
+
+   // 从 error 对象读出各属性，设置到响应中
+   ctx.body = {
+    code: 0,
+    msg: error,
+   }
+   ctx.status = status
+  }
+ }
+}
+
+// config/config.default.js
+module.exports = {
+  middleware: ['errorHandler'] // 加载中间件
+}
+
+// 通过 this.ctx.throw(500, error) 抛出异常
 ```
 
 ## Plugin
@@ -236,3 +290,7 @@ module.exports = {
 [egg-validate](https://www.npmmirror.com/package/egg-validate) validate plugin for egg
 
 [parameter](https://github.com/node-modules/parameter) A parameter verify tools
+
+[egg-router-group](https://github.com/zzzs/egg-router-group) have the ability to route group operations for egg.
+
+[egg-mongoose](https://www.npmmirror.com/package/egg-mongoose) Egg's mongoose plugin
