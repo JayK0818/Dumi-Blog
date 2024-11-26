@@ -379,3 +379,114 @@ await Person.
   select({ name: 1, occupation: 1 }).
   exec();
 ```
+
+## Validation
+
+  1. Validation is defined in the SchemaType
+  2. Validation is middleware. Mongoose registers validation as a **pre('save')** hook on every schema by default.
+  3. When you call Model#save, Mongoose also runs subdocument validation.
+  4. The **unique** option is not a validator.
+
+```js
+// built-in validators
+
+const mongoose = require('mongoose')
+const Schema = new mongoose.Schema({
+  eggs: {
+    type: Number,
+    min: [6, '验证错误时的message']
+  },
+  bacon: {
+    type: Number,
+    required:[true, 'why no bacon?']
+  },
+  drink: {
+    type: String,
+    enum: ['Coffee', 'Tea']
+  }
+});
+
+// 自定义错误信息
+const userSchema = new Schema({
+  age: {
+    type: Number,
+    minLength: [6, 'Must be at least 6, got {VALUE}'] // 使用数组的方式
+  },
+  drink: {
+    type: String,
+    enum: {
+      values: ['Coffee'],
+      message: '{VALUE} is not supported'
+    }
+  }
+})
+
+// 自定义校验方式
+const userSchema = new Schema({
+  phone: {
+    type: String,
+    validate: {
+      validator (v) => {
+        return /\d{3}-\d{3}-\d{4}/.test(v)
+      },
+      message: props => `${props.value} is not a valid phone number!`
+      /**
+       * props: {
+            validator: [Function: validator],
+            message: [Function: message],
+            type: 'user defined',
+            path: 'phone',
+            fullPath: undefined,
+            value: '123'
+          }
+      */
+    },
+    required: [true, 'phone number is required']
+  }
+})
+```
+
+  Custom validators can also be asynchronous. If your validator function returns a promise, mongoose
+  will wait for that promise to settle.
+
+```js
+const userSchema = new mongoose.Schema({
+  username: {
+    type: String,
+    validate: () => Promise.reject(new Error('something went wrong!'))
+  },
+   email: {
+    type: String,
+    validate: {
+      validator: () => Promise.resolve(false),
+      message: 'Email validation failed'
+    }
+  }
+})
+```
+
+## Middleware
+
+  Middleware is specified on the schema level and is useful for writing plugins.
+
+1. document middleware
+2. model middleware
+3. aggregate middleware
+4. query middleware: query middleware executes when you call **exec()** or **then()** on a Query object.
+
+```js
+// Define Middleware before compiling Models
+
+const schema = new mongoose.Schema({
+  name: String
+})
+// 在调用 mongoose.model() 之前注册
+schema.pre('save', (next, options) => {
+  console.log('save-middleware')
+  next()
+})
+const User = mongoose.model('User', schema)
+```
+
+  The **save** function triggers **validate()** hooks. All **pre('validate')** and **post('validate')**
+  hooks get called before any **prev('save')** hooks.
