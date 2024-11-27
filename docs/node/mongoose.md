@@ -2,7 +2,7 @@
 nav: Node
 ---
 
-# Mongoose
+# Mongoose V8.8.3
 
   Mongoose is a MongoDB object modeling tool designed to work in asynchronous environment.
 
@@ -386,6 +386,7 @@ await Person.
   2. Validation is middleware. Mongoose registers validation as a **pre('save')** hook on every schema by default.
   3. When you call Model#save, Mongoose also runs subdocument validation.
   4. The **unique** option is not a validator.
+  5. You can disable automatic validation before save by setting the validationBeforeSaveOption
 
 ```js
 // built-in validators
@@ -405,6 +406,14 @@ const Schema = new mongoose.Schema({
     enum: ['Coffee', 'Tea']
   }
 });
+
+/**
+ * By default, documents are automatically validated before they are saved to the database.
+*/
+const UserSchema = new mongoose.Schema({
+  name: string
+})
+UserSchema.set('validateBeforeSave', false) // 取消参数校验, 会跳过校验保存数据至数据库
 
 // 自定义错误信息
 const userSchema = new Schema({
@@ -480,9 +489,13 @@ const userSchema = new mongoose.Schema({
 const schema = new mongoose.Schema({
   name: String
 })
-// 在调用 mongoose.model() 之前注册
+// 在调用 mongoose.model() 之前注册, 记得调用next()方法
 schema.pre('save', (next, options) => {
   console.log('save-middleware')
+  next()
+})
+schema.prev('validate', (next) => {
+  console.log('validate-middleware-invoke')
   next()
 })
 const User = mongoose.model('User', schema)
@@ -490,3 +503,60 @@ const User = mongoose.model('User', schema)
 
   The **save** function triggers **validate()** hooks. All **pre('validate')** and **post('validate')**
   hooks get called before any **prev('save')** hooks.
+
+```js
+//打印顺序 ----- 以下代码来自官网
+schema.pre('validate', function() {
+  console.log('this gets printed first');
+});
+schema.post('validate', function() {
+  console.log('this gets printed second');
+});
+schema.pre('save', function() {
+  console.log('this gets printed third');
+});
+schema.post('save', function() {
+  console.log('this gets printed fourth');
+});
+```
+
+```js
+// query-middleware
+UserSchema.pre('find', (next) => {
+console.log('find-middleware-invoke')
+next()
+})
+UserSchema.pre('countDocuments', () => {
+console.log('countDocuments-middleware-invoke')
+})
+UserSchema.pre('findOne', () => {
+console.log('findOne-middleware-invoke')
+})
+
+UserSchema.pre('updateOne', {
+  document: true,
+  query: false
+})
+// register updateOne middleware as document middleware.
+// You need to set both *document* and *query* properties in the passed object.
+
+// user.controller.js
+async getUser () {
+   async user_list() {
+  try {
+   const user_list = await this.ctx.model.User.find()
+   const count = await this.ctx.model.User.countDocuments()
+   const target = await this.ctx.model.User.findOne()
+  //  执行相应操作, 以上对应的中间件会执行
+  } catch (err) {
+   console.log(err)
+  }
+ }
+}
+```
+
+[mongoose-middleware](https://mongoosejs.com/docs/middleware.html) Mongoose Middleware
+
+## populate
+
+  Mongoose has a powerful alternative called **populate()**, which lets you reference documents in other collections.
