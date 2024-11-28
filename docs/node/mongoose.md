@@ -560,3 +560,128 @@ async getUser () {
 ## populate
 
   Mongoose has a powerful alternative called **populate()**, which lets you reference documents in other collections.
+
+```js
+ const TodoSchema = new mongoose.Schema({
+  text: {
+   type: String,
+   required: true,
+  },
+  user: {
+   type: mongoose.Schema.Types.ObjectId,
+   ref: 'User',
+   required: true,
+  },
+ })
+```
+
+  The **ref** option is what tells Mongoose which model to use during population.
+
+```js
+const todo = new Todo({
+  text: 'hello world',
+  user: '67433ab40ac7668cce0f07e7' // assign the _id from the user
+  // we recommend using ObjectIds as _id properties
+})
+await todo.save()
+
+const todo = await Model.find().populate('user')
+// the value is replaced with the mongoose document returned from the database
+/**
+ * [
+*     {
+      "_id": "674874446e895e6117ef024a",
+      "text": "1122212345222",
+      "user": {
+          "_id": "67433ab40ac7668cce0f07e7",
+          "username": "hello123",
+          "password": "123456789",
+          "__v": 0
+      },
+      "__v": 0
+    }
+  ]
+*/
+
+// 手动设置为一个document的引用
+const todo = await Todo.findOne()
+todo.user = await User.findOne({ name: 'hello' })
+/**
+ * todo: {
+    _id: new ObjectId("6748743e6e895e6117ef0248"),
+    text: 'hello world',
+    user: {
+      _id: new ObjectId("6745d760ef7d2f8e3ec10056"),
+      username: 'hello',
+      password: '123456789',
+      phone: '152-098-9139',
+      __v: 0
+    },
+    __v: 0
+  }
+ * 
+*/
+
+// 如果文档引用不存在(比如删除之后), 那么获取数据为null
+[
+  {
+    "_id": "6748743e6e895e6117ef0248",
+    "text": "1122212345222222",
+    "user": null,
+    "__v": 0
+  },
+  {
+    "_id": "674874446e895e6117ef024a",
+    "text": "1122212345222",
+    "user": null,
+    "__v": 0
+  },
+  {
+    "_id": "674874466e895e6117ef024c",
+    "text": "112221234522212",
+    "user": null,
+    "__v": 0
+  }
+]
+```
+
+### Field Selection
+
+  有时我们可能只需要返回一部分字段。This can be accomplished by passing the usual field name syntax as the second argument
+  to the populated method
+
+```js
+const todo = await Todo.find()
+  .populate('user', 'username') // 只返回用户的username, _id会默认返回
+
+// 调用populate多次 (the same path)
+const todo = await Todo.find()
+  .populate('user', 'username')
+  .populate('user', 'password') // 最后一次操作有效
+
+/**
+ * [
+ * 
+ *  {
+      "_id": "674874446e895e6117ef024a",
+      "text": "1122212345222",
+      "user": {
+          "_id": "6745d760ef7d2f8e3ec10056",
+          "password": "123456789"
+      },
+    },
+    {
+      "_id": "674874466e895e6117ef024c",
+      "text": "112221234522212",
+      "user": null,
+    }
+  ]
+*/
+
+// ------- 传递一个对象 ---------
+await Todo.find()
+  .populate({
+    path: 'user',
+    select: 'username -_id',  // 显式的移除_id属性
+  })
+```
