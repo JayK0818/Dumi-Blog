@@ -685,3 +685,130 @@ await Todo.find()
     select: 'username -_id',  // 显式的移除_id属性
   })
 ```
+
+:::warning
+The Document#populate() method does not support chaining. You need to call populate() multiple times,
+or with an array of paths, to populate multiple paths.
+
+```js
+await person.populate(['storied', 'fans'])
+```
+
+:::
+
+### Populating across multiple levels
+
+  You have a user schema which keeps track of the user's friends
+
+```js
+// UserSchema
+const UserSchema = new mongoose.Schema({
+  //...
+  friends: [
+    {
+      type: Mongoose.schema.Types.MongooseId,
+      ref: 'User'
+    }
+  ]
+})
+
+/**
+ * Populate let you get a list of a user's friends, but what if you also wanted a user's friends?
+*/
+const User.find()
+  .populate({
+    path: 'friends',
+    populate: {
+      path: 'friends',  // 朋友的朋友
+    }
+  })
+
+// 添加好友时 可以直接push一个用户id, 或者 document
+const user = await this.ctx.model.User.findById('xxxxxxxxx')
+await me.friends.push(user)
+// or
+await me.friends.push('xxxxxxxx')
+
+await me.save()
+
+/**
+ * {
+    "_id": "6745d760ef7d2f8e3ec10056",
+    "username": "hello12a12",
+    "friends": [
+        {
+            "username": "hell",
+            "password": "123456789"
+        },
+        {
+            "username": "hell",
+            "password": "123456789"
+        },
+    ]
+}
+*/
+```
+
+### Dynamic References
+
+  Mongoose can also populate from multiple collections based on the value of a property in the document.
+
+  A user may comment on either a blog post or a product.
+
+```js
+const CommentSchema = new Schema({
+  body: {
+    type: String,
+    required: true
+  },
+  doc: {
+    type: Schema.Types.ObjectId, // doc _id 可以是 BlogPost的_id 或者 Product的_id
+    required: true
+    refPath: 'docModel'
+  }
+  docModel: {
+    type: String,
+    required: true,
+    enum: ['BlogPost', 'Product']
+  }
+})
+
+const comments = await Comment.find().populate('doc')
+// 会同时拉取对 blog 和 product的评论
+```
+
+  以下这种方式也可以, 分别定义 blog 和 product属性, 然后对每个属性使用 populate()
+
+```js
+const CommentSchema = new mongoose.Schema({
+  blog: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Blog'
+  },
+  product: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Product'
+  }
+})
+const comments = await Comment.find()
+  .populate('product')
+  .populate('blog')
+```
+
+  但是如果 需要再 添加对其他类型的评论 如 articles, musics, 那么又得再次添加相应属性, 然后再依次调用populate().
+
+```js
+// dynamic references via ref TODO:
+const commentSchema = new Schema({
+  verifiedBuyer: Boolean,
+  doc: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: function () {
+      return this.verifiedBuyer ? 'Product' : 'BlogPost'
+    }
+  }
+})
+```
+
+[Principle of Least Cardinality](https://dev.to/swyx/4-things-i-learned-from-mastering-mongoose-js-25e#4-principle-of-least-cardinality)
