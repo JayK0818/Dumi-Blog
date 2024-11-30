@@ -769,12 +769,63 @@ const CommentSchema = new Schema({
   docModel: {
     type: String,
     required: true,
-    enum: ['BlogPost', 'Product']
+    enum: ['Music', 'Article']
   }
 })
+```
+
+```js
+// 创建评论
+
+class UserController extends egg.Controller {
+ async create_music_comment() {
+  const { id, text } = this.ctx.request.body
+  const comment = new this.ctx.model.Comment({
+    doc: id,
+    text,
+    docModel: 'Music',
+  })
+  await comment.save()
+ }
+async create_article_comment() {
+  const { id, text } = this.ctx.request.body
+  const comment = new this.ctx.model.Comment({
+   doc: id,
+   text,
+   docModel: 'Music',
+  })
+  await comment.save()
+ }
+}
+
 
 const comments = await Comment.find().populate('doc')
-// 会同时拉取对 blog 和 product的评论
+// 会同时拉取对 music 和 article的评论
+
+/**
+ * [
+    {
+        "_id": "674b0cead183f3e350445dc5",
+        "text": "好文章1123436984",
+        "doc": {
+            "_id": "674b0a8bea3d6496b648c688",
+            "text": "匆匆"
+        },
+        "docModel": "Article",
+        "__v": 0
+    },
+    {
+        "_id": "674b0d192adfb22f81dba8b7",
+        "text": "好音乐112",
+        "doc": {
+            "_id": "674b0a4511b0c3ad9a6085e7",
+            "text": "听爸爸的话"
+        },
+        "docModel": "Music",
+    },
+]
+ * 
+*/
 ```
 
   以下这种方式也可以, 分别定义 blog 和 product属性, 然后对每个属性使用 populate()
@@ -797,8 +848,10 @@ const comments = await Comment.find()
 
   但是如果 需要再 添加对其他类型的评论 如 articles, musics, 那么又得再次添加相应属性, 然后再依次调用populate().
 
+  ref也可以为一个函数 用来定义判断评论的是哪个Model下的数据
+
 ```js
-// dynamic references via ref TODO:
+// dynamic references via ref 
 const commentSchema = new Schema({
   verifiedBuyer: Boolean,
   doc: {
@@ -811,4 +864,75 @@ const commentSchema = new Schema({
 })
 ```
 
+### Populate Virtuals
+
+  one-to-many relationships. (一对多)
+
+```js
+const AuthorSchema = new Schema({
+  name: String
+})
+const BlogSchema = new Schema({
+  title: String,
+  author: {
+    type: Mongoose.Schema.Types.ObjectId,
+    ref: 'Author'
+  }
+})
+```
+
+  these two schemas, do not support populating an author's list of blog posts. That's where **virtual populate** comes in.
+
+```js
+UserSchema.virtual('articles', {
+  ref: 'Article', // 指向哪个model
+  localField: '_id', // 用户表的id字段
+  foreignField: 'author',  // Article中关联用户的字段
+  // Another option for populate virtuals is match. This option adds an extra filter condition to
+  // the query Mongoose uses to populate
+  match: {
+    published: false
+  }
+})
+
+const articles = await this.ctx.model.User.findById('xxxxxx').populate('articles')
+```
+
+:::warning
+Keep in mind that virtuals are not included in **toJSON()** and **toObject()** output by default. set the
+*virtuals: true* options on your schema's toJSON() and toObject() options.
+
+```js
+const userSchema = new Schema({
+  // ...
+}, {
+  toJSON: {
+    virtuals: true // res.json() JSON.stringify() include virtuals
+  },
+  toObject: {
+    virtuals: true
+  }
+})
+```
+
+:::
+
 [Principle of Least Cardinality](https://dev.to/swyx/4-things-i-learned-from-mastering-mongoose-js-25e#4-principle-of-least-cardinality)
+
+### Transform populated documents
+
+  You can manipulate populated documents using the **transform** option. If you specify a **transform** function,
+  Mongoose will call this function on every populated document in the result with two arguments
+
+1. The populated document
+2. The original id used to populate the document
+
+```js
+const articles = await Article.find().populate({
+  path: 'user',
+  transform: (doc, id) => {
+    console.log(doc, id)
+    return doc
+  }
+})
+```
