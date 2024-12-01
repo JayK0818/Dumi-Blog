@@ -212,3 +212,11 @@ const stream = rfs.createStream(generator, {
   在线生成UUID字符的网站
 
 [UUID-Online](https://www.uuid.online/)
+
+## nrm
+
+  npm register manager
+
+[nrm](https://www.npmmirror.com/package/nrm)
+
+[unplugin-auto-import](https://www.npmmirror.com/package/unplugin-auto-import) Register global imports on demand for vite and webpack

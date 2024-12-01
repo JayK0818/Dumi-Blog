@@ -936,3 +936,90 @@ const articles = await Article.find().populate({
   }
 })
 ```
+
+### Populate Maps
+
+```js
+const BrandSchema = new Schema({
+  name: String,
+  members: {
+    type: Map,
+    of: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+    }
+  }
+});
+
+// 创建一条数据
+class BrandController extends egg.Controller {
+  async create_brand () {
+    const { singer, writer, name } = this.ctx.request.body
+    const brand = new this.ctx.model.Brand({
+      name,
+      members: {
+        writer,
+        singer
+      }
+    })
+    await brand.save()
+  }
+}
+
+// 获取数据时使用populate
+const brand = await this.ctx.model.find().populate('members.$*')
+/**
+ *  {
+      "_id": "674bdd14c4b41d790f41989b",
+      "name": "飞鹤",
+      "members": {
+        "singer": {
+          "_id": "6745d760ef7d2f8e3ec10056",
+          "username": "hello12a12",
+        },
+        "writer": {
+          "_id": "67471c6971f2142a6fdfb58f",
+          "username": "hello",
+        }
+      },
+    }
+ * 
+*/
+```
+
+[mongoose-auto-populate](https://plugins.mongoosejs.io/plugins/autopopulate#it-supports-document-arrays)
+
+## plugins
+
+  plugins allow for applying pre-packaged capabilities to extend their functionality. This is a very powerful feature.
+
+```js
+// 给文档添加一个 添加一个 loadedAt
+module.exports = function loadedAtPlugin(schema, options) {
+  schema.virtual('loadedAt').
+    get(function() { return this._loadedAt; }).
+    set(function(v) { this._loadedAt = v; });
+
+  schema.post(['find', 'findOne'], function(docs) {
+    if (!Array.isArray(docs)) {
+      docs = [docs];
+    }
+    const now = new Date();
+    for (const doc of docs) {
+      doc.loadedAt = now;
+    }
+  });
+};
+
+UserSchema.plugin(loadedAtPlugin)
+
+// 全局Plugin
+const mongoose = require('mongoose')
+mongoose.plugin(loadedAtPlugin)
+```
+
+:::danger
+You should make sure to apply plugins before you call **mongoose.model()**
+:::
+
+[mongoose-plugin](https://plugins.mongoosejs.io/)
