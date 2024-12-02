@@ -1023,3 +1023,61 @@ You should make sure to apply plugins before you call **mongoose.model()**
 :::
 
 [mongoose-plugin](https://plugins.mongoosejs.io/)
+
+## Timestamps
+
+  Mongoose schemas support a **timestamps** option, If you set *timestamps: true*, Mongoose will add
+  two properties of type Date to your schema:
+
+  1. createdAt
+  2. updatedAt
+
+```js
+const UserSchema = new mongoose.Schema({
+  username: String
+}, {
+  timestamps: true,
+  timestamps: { // 自定义属性吗
+    createdAt: 'created_at',
+    updatedAt: 'updated_at'
+  }
+})
+const User = mongoose.model('User', UserSchema)
+const user = new User({
+  username: 'hello'
+})
+await user.save()
+
+/**
+ * 
+* {
+    "_id": "674db7a82fcca47db71132ea",
+    "username": "张三123",
+    "createdAt": "2024-12-02T13:35:36.510Z",
+    "updatedAt": "2024-12-02T13:35:36.510Z",
+  }
+*/
+```
+
+:::info
+The **createdAt** property is immutable, and Mongoose overwrites any user-specified updates to
+**updatedAt** by default.
+:::
+
+```js
+ async update_user() {
+  const { username, id } = this.ctx.request.body
+  /**
+   * replaceOne() and findOneAndReplace() overwrite all non-_id properties. 
+   * including immutable properties like createdAt
+   */
+  await this.ctx.model.User.findOneAndReplace(
+   {
+    _id: id,
+   },
+   {
+    username,
+   }
+  )
+ }
+```
