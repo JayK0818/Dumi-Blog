@@ -1081,3 +1081,53 @@ The **createdAt** property is immutable, and Mongoose overwrites any user-specif
   )
  }
 ```
+
+## TypeScript
+
+```js
+import { Schema, model, HydratedDocument } from 'mongoose'
+
+interface User {
+  name: string
+  email: string
+}
+
+const UserSchema = new Schema<User>({
+  name: {
+    type: String,
+    required: true
+  },
+  email: {
+    type: String,
+    required: true
+  }
+})
+
+const User = model<User>('User', UserSchema)
+
+const user: HydratedDocument<User> = new User({
+  name: 'kyrie',
+  email: '123456@qq.com'
+})
+```
+
+  To define a property of type **ObjectId**, you should use **Types.ObjectId** in the TypeScript document
+  interface.
+
+```js
+import { Schema, Types } from 'mongoose'
+interface User {
+  name: String
+  organization: Types.ObjectId
+}
+
+const userSchema = new Schema<User>({
+  name: {
+    type: String
+  },
+  organization: {
+    type: Schema.Types.ObjectId,
+    ref: 'Organization'
+  }
+})
+```

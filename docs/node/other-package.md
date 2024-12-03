@@ -220,3 +220,5 @@ const stream = rfs.createStream(generator, {
 [nrm](https://www.npmmirror.com/package/nrm)
 
 [unplugin-auto-import](https://www.npmmirror.com/package/unplugin-auto-import) Register global imports on demand for vite and webpack
+
+[mongo-express](https://github.com/mongo-express/mongo-express) A web-based MongoBD admin interface written with Node.js Express, and Bootstrap 5
