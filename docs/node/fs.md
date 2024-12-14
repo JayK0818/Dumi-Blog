@@ -4,7 +4,7 @@ group:
   title: 基础
 ---
 
-# fs 模块
+# fs
 
 The **node:fs** module enables interacting with the file system.
 

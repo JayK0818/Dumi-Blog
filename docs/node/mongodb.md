@@ -253,7 +253,7 @@ db.users.find({ username: { $in: ['jayk0720'] } })
 # ]
 ```
 
-## Limit/Skip
+## Limit/Skip/Sort
 
 limit() 用于限制查询结果返回的文档数量, 而 skip()用于跳过指定数量的文档。
 
@@ -262,10 +262,9 @@ db.users.find().skip(20).limit(10)
 ```
 
 :::info
-当结合 skip() 和 limit() 时，skip() 应该在 limit() 之前使用，以避免意外行为
+当结合 skip() 和 limit() 时，skip() 应该在 limit() 之前使用，以避免意外行为. skip, sort 和limit三者的执行顺序和位置无关。
+执行顺序为 sort ---> skip ----> limit
 :::
-
-## Sort
 
 在 MongoDB 中, 使用 sort 排序, sort() 方法可以通过参数指定排序的字段. **1** 表示升序, **-1** 表示降序。
 
@@ -285,6 +284,78 @@ db.users.find().sort({ username: -1 })
 # { _id: ObjectId("67511fca115a00ec49f9e175"), username: 'lebron' },
 # { _id: ObjectId("67511fc0115a00ec49f9e174"), username: 'jayk' },
 # { _id: ObjectId("67511fd5115a00ec49f9e176"), username: 'durant' },
+```
+
+## 投影
+
+```js
+db.users.find({}, { username: 1 }) // 只返回 username字段
+/**
+ * [
+  { _id: ObjectId('6724d6f32f9d765719ae589e'), username: 'kyrie123' },
+  { _id: ObjectId('672615ef676a6bd8bc321c8d'), username: 'lebron' },
+]
+*/
+
+db.users.find({}, { username: 1, _id: 0 })
+/**
+ * [
+  { username: 'kyrie123' },
+  { username: 'lebron' }
+]
+*/
+```
+
+  关于投影的使用 以下方式会报错
+
+```js
+db.users.find({}, {username: 1, password: 0,  _id: 0})
+// Cannot do exclusion on field password in inclusion projection
+```
+
+  除了文档主键外， 不可以在其他字段混合使用 包含和不包含 这两种操作
+
+```js
+db.users.find({}, {username: 1, password: 1,  _id: 0}) // 显示用户名和密码
+// 或者
+db.users.find({}, { email: 0,  _id: 0 })  // 除了email, 其他字段都显示
+```
+
+```js
+// $slice 操作符指定在查询结果中返回的数组中的元素数。
+db.phones.find({}, { size: { $slice: 1 }  })
+/**
+ * [
+    {
+      _id: ObjectId('675d91062f3b03da34e9ea50'),
+      name: 'iPhone16',
+      brand: 'Apple',
+      size: [ 64 ]
+    },
+    {
+      _id: ObjectId('675d91322f3b03da34e9ea51'),
+      name: 'iPhone15',
+      brand: 'Apple',
+      size: [ 64 ]
+    },
+    {
+      _id: ObjectId('675d91402f3b03da34e9ea52'),
+      name: 'iPhone14',
+      brand: 'Apple',
+      size: [ 64 ]
+    }
+  ]
+*/
+
+// $elemMatch 操作符会限制查询结果中的 <array> 字段的内容, 以便只包含与 $elemMatch条件匹配的 第一个 元素
+db.phones.find({}, { size: { $elemMatch: { $gt: 64 } }  })
+/**
+ * [
+      { _id: ObjectId('675d91062f3b03da34e9ea50'), size: [ 126 ] },
+      { _id: ObjectId('675d91322f3b03da34e9ea51'), size: [ 128 ] },
+      { _id: ObjectId('675d91402f3b03da34e9ea52'), size: [ 128 ] }
+    ]
+*/
 ```
 
 [MongoDB 查询谓词与投影](https://www.mongodb.com/zh-cn/docs/manual/reference/operator/query/#std-label-query-projection-operators-top)

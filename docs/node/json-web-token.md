@@ -4,8 +4,10 @@ group:
   title: Package
 ---
 
-```js
-// 下载
+# JWT
+
+```shell
+# 下载
 npm install jsonwbtoken
 ```
 

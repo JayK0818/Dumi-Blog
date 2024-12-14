@@ -62,12 +62,12 @@ export const five = await Promise.resolve(5);
 console.log(module.paths);
 /**
  * [
-    '/Users/jinkang/Desktop/javascript-study-notes/Node/module/cms/node_modules',
-    '/Users/jinkang/Desktop/javascript-study-notes/Node/module/node_modules',
-    '/Users/jinkang/Desktop/javascript-study-notes/Node/node_modules',
-    '/Users/jinkang/Desktop/javascript-study-notes/node_modules',
-    '/Users/jinkang/Desktop/node_modules',
-    '/Users/jinkang/node_modules',
+    '/Users/root/Desktop/javascript-study-notes/Node/module/cms/node_modules',
+    '/Users/root/Desktop/javascript-study-notes/Node/module/node_modules',
+    '/Users/root/Desktop/javascript-study-notes/Node/node_modules',
+    '/Users/root/Desktop/javascript-study-notes/node_modules',
+    '/Users/root/Desktop/node_modules',
+    '/Users/root/node_modules',
     '/Users/node_modules',
     '/node_modules'
   ]
