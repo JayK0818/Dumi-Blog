@@ -67,6 +67,20 @@ db.collection.deleteMany()
 db.collection.deleteOne()
 ```
 
+  **db.collection.find()** 方法返回一个游标。在mongosh中, 如果未使用 var 关键字将返回的游标分配给变量, 则该游标会自动迭代多达20次。
+  最多可在结果中输出前20个文档。
+
+```js
+// 手动遍历游标
+const cursor = db.todos.find()
+while(cursor.hasNext())  {
+  console.log(cursor.next())
+}
+
+// 使用toArray()方法遍历游标, toArray()方法会耗尽游标。
+const documents = cursor.toArray().
+```
+
 ## 嵌入式文档
 
 MongoDB 使用 点符号来访问数组的元素和访问嵌入式文档的字段。
@@ -222,8 +236,105 @@ db.orders.aggregate([
 ];
 ```
 
+1. $project:  修改输入文档的结构。
+2. $match:    用于过滤数据, 只输出符合条件的文档。
+3. $group:    将集合中的文档分组, 用于统计结果。
+4. $limit:    限制MongoDB聚合管道返回的文档数
+5. $skip:     跳过指定数量的文档, 并返回余下的文档。
+6. $unwind:   将文档中的某一个数组类型字段拆分成多条, 每条包含数组中的一个值。
+
+```js
+// $project 取消id字段返回, 其他的字段 返回 title, author
+db.articles.aggregate(
+  {
+    $project: {
+      _id: 0,
+      title: 1,
+      author: 1
+    }
+  }
+)
+
+// $unwind
+db.phones.aggregate([{ $unwind: { path: '$size' } }])
+/**
+ * [
+    {
+      _id: ObjectId('675d91062f3b03da34e9ea50'),
+      name: 'iPhone16',
+      brand: 'Apple',
+      size: 64
+    },
+    {
+      _id: ObjectId('675d91062f3b03da34e9ea50'),
+      name: 'iPhone16',
+      brand: 'Apple',
+      size: 126
+    },
+    {
+      _id: ObjectId('675d91062f3b03da34e9ea50'),
+      name: 'iPhone16',
+      brand: 'Apple',
+      size: 256
+    }
+  ]
+*/
+```
+
 在 MongoDB 中, 存储在集合中的每个文档都需要一个唯一的 **\_id** 字段作为主键。如果插入的文档省略了 **\_id** 字段,
 MongoDB 驱动程序会自动为 **\_id** 字段生成一个 ObjectId.
+
+1. **_id** 字段始终是文档中的第一个字段。设置后, 无法更新 **_id** 字段的值。
+2. 字段名称更新可能会导致文档中的字段重新排序。
+
+## 索引
+
+  MongoDB在创建集合时会在 **_id** 字段上创建一个唯一索引。索引支持在MongoDB中高效执行查询。
+
+  索引的默认名称是索引键和索引中每个方向(1或-1)的连接, 使用下划线作为分隔符。
+
+```js
+db.phones.createIndex({ brand: 1 }, {
+  unique: true  // 唯一索引
+})
+
+db.phones.getIndexes()
+/**
+ * [
+      { v: 2, key: { _id: 1 }, name: '_id_' },
+      { v: 2, key: { brand: 1 }, name: 'brand_1' }
+    ]
+*/
+
+db.phones.dropIndexes() // 删除_id索引之外的所有索引
+```
+
+1. 单字段索引收集集合内每个文档中单个字段的数据, 并对其排序。可以在单个字段上创建索引, 提高对该字段的查询性能。
+2. 复合索引从集合中每个文档的两个或多个字段收集数据并对其排序。数据先按索引中的第一个字段分组, 再按每个后续字段分组。
+3. 多键索引从包含数组值的字段中收集数据并进行排序。多键索引可提高对数组字段的查询性能。
+
+```js
+// 创建复合索引
+db.phones.createIndex({
+  name: 1,
+  brand: 1
+})
+
+// 索引前缀是索引字段的起始子集。复合索引支持对索引前缀中包含的所有字段进行查询。
+db.stocks.createIndex({
+  item: 1,
+  location: 1,
+  stock: 1
+});
+/**
+ * 此索引具有以下索引前缀：{ item: 1 } / { item: 1, location: 1 }
+*/
+
+// MongoDB 可以使用复合索引来支持对这些字段组合的查询:
+/**
+ * item / item,location / item,location,stock
+ *  */
+```
 
 ## 操作符
 
@@ -356,9 +467,19 @@ db.phones.find({}, { size: { $elemMatch: { $gt: 64 } }  })
       { _id: ObjectId('675d91402f3b03da34e9ea52'), size: [ 128 ] }
     ]
 */
+
+// 过滤字段为数组时, 数组中元素匹配的数据 $<field> 使用$指示字段路径
+db.phones.find({}, { size: { $filter: { input: '$size', as: 'size', cond: { $gt: ["$$size", 100]} } } })
+/* [
+  { _id: ObjectId('675d91062f3b03da34e9ea50'), size: [ 126, 256 ] },
+  { _id: ObjectId('675d91322f3b03da34e9ea51'), size: [ 128, 256 ] },
+  { _id: ObjectId('675d91402f3b03da34e9ea52'), size: [ 128 ] }
+] */
 ```
 
 [MongoDB 查询谓词与投影](https://www.mongodb.com/zh-cn/docs/manual/reference/operator/query/#std-label-query-projection-operators-top)
+
+[MongoDB聚合操作符](https://www.mongodb.com/zh-cn/docs/manual/reference/operator/aggregation/)
 
 [MongoDB 下载](https://www.mongodb.com/try/download/community)
 [MongoDB-Shell](https://www.mongodb.com/try/download/shell)
