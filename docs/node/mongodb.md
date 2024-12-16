@@ -484,3 +484,33 @@ db.phones.find({}, { size: { $filter: { input: '$size', as: 'size', cond: { $gt:
 [MongoDB 下载](https://www.mongodb.com/try/download/community)
 [MongoDB-Shell](https://www.mongodb.com/try/download/shell)
 [MongoDB-Compass](https://www.mongodb.com/try/download/compass)
+
+## 用户管理
+
+```js
+// 创建用户
+db.createUser(
+  {
+    user: 'kyrie',
+    pwd: 123456,
+    pwd: passwordPrompt(), // 后续会提示输入密码
+    roles: [
+      {
+        role: 'userAdminAnyDatabase', db: 'mongodb'
+      },
+      {
+        role: 'readWriteAnyDatabase', db: 'mongodb'
+      }
+    ]
+  }
+)
+```
+
+  启用用户认证
+
+```shell
+mongod --dbpath /var/local/mongodb  --auth
+
+# 连接数据库
+mongosh --authenticationDatabase 'mongodb' -u 'kyrie' -p '123456'
+```
