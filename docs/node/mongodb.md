@@ -287,6 +287,13 @@ MongoDB 驱动程序会自动为 **\_id** 字段生成一个 ObjectId.
 1. **_id** 字段始终是文档中的第一个字段。设置后, 无法更新 **_id** 字段的值。
 2. 字段名称更新可能会导致文档中的字段重新排序。
 
+  ObjectId中存储了4个字节的时间戳. 可以通过 **getTimestamp** 函数来获取文档的创建时间:
+
+```js
+db.phones.findOne()._id.getTimestamp()
+// ISODate('2024-12-14T14:07:02.000Z')
+```
+
 ## 索引
 
   MongoDB在创建集合时会在 **_id** 字段上创建一个唯一索引。索引支持在MongoDB中高效执行查询。
@@ -513,4 +520,18 @@ mongod --dbpath /var/local/mongodb  --auth
 
 # 连接数据库
 mongosh --authenticationDatabase 'mongodb' -u 'kyrie' -p '123456'
+
+db.serverStatus().connections
+# {
+#   current: 4,
+#   available: 838856,
+#   totalCreated: 4,
+#   rejected: 0,
+#   active: 2,
+#   threaded: 4,
+#   exhaustIsMaster: Long('0'),
+#   exhaustHello: Long('0'),
+#   awaitingTopologyChanges: Long('1'),
+#   loadBalanced: Long('0')
+# }
 ```
