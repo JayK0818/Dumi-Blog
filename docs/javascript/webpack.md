@@ -15,7 +15,7 @@ module.exports = {
     path: path.resolve(__dirname, 'src/dist'),
     filename: 'bundle.js',
     /*
-    fullhash: compilation完整的hash值
+    fullhash: 完整的hash值
     id: 此chunk的id
     name: 此chunk的名称
     chunkhash: 此chunk的hash, 包含该chunk的所有元素
@@ -95,12 +95,8 @@ module.exports = {
 }
 ```
 
-  下面是分别按照 inline / resource / source的方式配置 打包后的结果。
-
 1. asset/inline
-
 2. asset/resource
-
 3. asset/source
 
   默认情况下, asset/resource 模块以 hash|ext|query 文件名发送到输出目录,可以在webpack配置中设置output.assetModuleFilename来修改模板字符串
