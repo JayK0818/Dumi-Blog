@@ -1,14 +1,25 @@
 ---
-title: getting start
+title: Getting-Start
 group:
   title: Webpack
 ---
 
 ## 入口
 
+  --config 可以指定配置文件, 默认配置文件 webpack.config.js
+
+```json
+{
+  "build": "webpack --config webpack.prod.js",
+  "serve": "webpack"
+}
+```
+
 ```js
 module.exports = {
   mode:'development',
+  // 或者从命令行传递 webpack --mode=development
+  mode: 'production',
   context: path.resolve(__dirname, 'app') // 基础目录,(绝对路径)
   entry: path.resolve(__dirname, 'src/index.js'), // 入口
   output: { // 出口
@@ -27,6 +38,98 @@ module.exports = {
     publicPath: ''  // 按需加载或加载外部资源 每个url的前缀
   }
 }
+
+// 也可以导出函数
+module.exports = function (env, arg) {
+  return {
+    mode: 'production',
+    // ...
+  }
+}
+
+/**
+ * 动态加载的模块 不是 入口起点。每个HTML页面都有一个入口起点。SPA: 一个入口起点, 多页应用: 多个入口起点
+*/
+```
+
+  如果传入一个字符串或者字符串数组, chunk会被命名为 **main**, 如果传入一个对象, 则每个属性的 (key) 会是chunk的名称。
+  (入口的输出文件名是从 output.filename中提取出来的)
+
+```js
+module.exports = {
+  entry: path.join(__dirname, 'src/index.js'),
+  output: {
+    path: path.join(__dirname, 'dist')
+  }
+  // 以上打包输出 main.js
+  entry: {
+    main: path.join(__dirname, 'src/index.js'),
+    greet: path.join(__dirname, 'src/greet.js'),
+  },
+  // 以上打包输出 main.js, greet.js
+  entry: {
+    main: path.join(__dirname, 'src/index.js'),
+    greet: path.join(__dirname, 'src/greet.js'),
+  },
+  output: {
+    path: path.join(__dirname, 'dist'),
+    filename: '[name].bundle.js'
+  }
+  // 以上打包输出 main.bundle.js, greet.bundle.js
+  entry: {
+    main: {
+    import: path.join(__dirname, 'src/index.js'),
+    dependOn: 'react',
+    },
+    greet: {
+    import: path.join(__dirname, 'src/greet.js'),
+    dependOn: 'react',
+    },
+    react: ['react'],
+  },
+  // 将依赖的公共第三方库拆分出来
+}
+```
+
+## Output
+
+  指示webpack输出 [bundle, asset]等资源的位置。
+
+```js
+module.exports = {
+  output: {
+    chunkFilename: '[name.bundle].js', // 非初始 chunk 文件的名称。
+    /**
+     * 1. 动态导入的js文件
+    */
+    chunkFormat: 'commonjs',
+    clean: true,  // 打包时清空之前的 output目录
+    filename: '[name].bundle.js', // 每个输出bundle的名称。---> 使用入口名称
+    filename: '[id].bundle.js',   // 使用内部 chunk id
+    filename: '[contenthash].bundle.js', // 使用由内容生成的hash
+    filename: '[name].[contenthash].bundle.js',  // -----> 使用多个组合
+    globalObject: 'this', // 决定使用哪个全局对象来挂载library.
+    hashDigest: 'hex',    // 生成hash时使用的编码方式
+    hashDigestLength: 20, // 打包生成的文件名中使用hash的长度
+    path: path.resolve(process.cwd(), 'dist'), // 对应一个绝对路径，
+  }
+}
+```
+
+## TypeScript
+
+```js
+import * as webpack from 'webpack';
+
+const config: webpack.Configuration = {
+  mode: 'production',
+  entry: './src/index.js',
+  output: {
+    // ...
+  }
+}
+
+export default config;
 ```
 
   output.filename 的文件 hash长度 可以使用 hash:16 contenthash:16等指定, 或者通过指定 output.hashDigestLength
@@ -340,3 +443,53 @@ module.exports = {
 
   此时, 更新index.js文件, 只有app.js的hash值会改变, 而如果更改 print.js 则 print.bundle.js和 runtime.bundle.js
   hash值都将更改。
+
+## Resolve
+
+  这些选项能够设置模块如何被解析。
+
+1. alias
+
+  创建 import 或者 require 的别名, 来确保模块引入变得更简单
+
+```js
+// webpack.config.js
+const path = require('path')
+module.exports = {
+  // ...
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    }
+  }
+}
+```
+
+* resolve.enforceExtension
+
+  如果是true, 将不允许无扩展名文件, 默认false
+
+* extensions
+
+  尝试按顺序解析这些后缀名。如果有多个文件有相同的名字，但后缀名不同，webpack 会解析列在数组首位的后缀的文件
+  并跳过其余的后缀。
+
+```js
+// webpack.config.js
+module.exports = {
+  // ...
+  resolve: {
+    extensions: ['.js', '.jsx', '.ts'],
+    mainFiles: ['index'],  // 解析目录时要使用的文件名
+    // webpack解析模块时 应该搜索的目录
+    modules: [path.resolve(__dirname, 'src'), 'node_modules']
+  }
+}
+```
+
+  能够是用户在引入模块时不带扩展
+
+```js
+import { print } from './print'
+print('hello world')
+```

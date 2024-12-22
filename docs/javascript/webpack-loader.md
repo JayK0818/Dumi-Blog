@@ -1,8 +1,12 @@
 ---
-title: loader
 group:
   title: Webpack
 ---
+
+# Loader
+
+  loader用于对模块的源代码进行转换。 **module.rules**允许你在webpack配置中指定多个loader。
+  我们预期loader模块导出为一个函数。并且编写为Node.js兼容的JavaScript.
 
 ## babel-loader
 
@@ -229,19 +233,13 @@ module: {
         loader: 'css-loader',
         options: {
           modules: undefined, // default
-          modules: true,
-          modules: {
-            auto: undefined,  //enable CSS modules for all files
-            auto: true,  // 匹配 module.css的文件
-            auto: false, // disable CSS modules
-            auto: /\.module\.css/, // enable CSS modules for all files matching 
-            auto: function(resourcePath) {
-              if(resourcePath.includes('index')) { // 过滤掉所有文件名包含index的文件
-                return false
-              }
-              return true
-            },
-          }
+          modules: true, // 对所有文件启用CSS模块
+          modules: false, // 对所有文件禁用CSS模块
+          // Using `local` value has same effect like using 'modules:true'
+          // 所有文件类名都不会被编译为哈希字符串 使用:local 的css 会会编译为 哈希类名
+          modules: 'global',
+          modules: 'local' // 所有文件类名都会被编译为哈希字符串 但是使用:global 的 css 除外
+          // 当modules配置项为对象时允许基于文件名自动启用CSS模块。
         }
       }]
     }
@@ -260,11 +258,18 @@ module: {
   use:['style-loader', {
     loader: 'css-loader',
     options: {
-      // Using `local` value has same effect like using 'modules:true'
-      // 所有文件类名都不会被编译为哈希字符串 使用:local 的css 会会编译为 哈希类名
-      modules: 'global',
-      modules: 'local' // 所有文件类名都会被编译为哈希字符串 但是使用:global 的 css 除外
+      // 如果没有配置modules.auto, 则对所有文件启用CSS模块。
       modules: {
+        auto: undefined,  //enable CSS modules for all files
+        auto: true,  // 匹配 module.css的文件
+        auto: false, // disable CSS modules
+        auto: /\.module\.css/, // enable CSS modules for all files matching 
+        auto: function(resourcePath) {
+          if(resourcePath.includes('index')) { // 过滤掉所有文件名包含index的文件
+            return false
+          }
+          return true
+        },
         localIdentName: '[hash:base64:8]', //hash class 生成的规则
         // name: 文件名
         // folder 文件夹名称
@@ -272,7 +277,10 @@ module: {
         // file filename and path
         // hash hash字符串
         // local : original class 转换前的类名
-
+        /** 建议:
+         * 1. 开发环境使用 '[path][name]__[local]'
+         * 2. 生产环境使用 '[hash:base64]'
+        */
         // Allows to redefine basic loader context for local ident name
         localIdentContext: path.resolve(__dirname, 'src/css')
 
@@ -284,7 +292,7 @@ module: {
 
         hashStrategy: 'resource-path-and-local-name'  // 生成has的策略
       }
-    }]
+    }
   }]
 }
 ```
