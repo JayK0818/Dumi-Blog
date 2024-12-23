@@ -479,10 +479,17 @@ module.exports = {
 module.exports = {
   // ...
   resolve: {
+    // 尝试按顺序解析这些后缀名。
     extensions: ['.js', '.jsx', '.ts'],
-    mainFiles: ['index'],  // 解析目录时要使用的文件名
+    // 解析目录时要使用的文件名 例如 import * as D3 from 'd3'
+    mainFields: ['browser', 'module', 'main'],
+    mainFiles: ['index'],
     // webpack解析模块时 应该搜索的目录
-    modules: [path.resolve(__dirname, 'src'), 'node_modules']
+    modules: [path.resolve(__dirname, 'src'), 'node_modules'],
+    // 模块解析失败, 重定向至某个模块
+    fallback: {
+      xyz: path.resolve(__dirname, 'path/to/file.js')
+    }
   }
 }
 ```
@@ -492,4 +499,18 @@ module.exports = {
 ```js
 import { print } from './print'
 print('hello world')
+```
+
+## Module
+
+  这些选项决定了如果处理项目中的不同类型的模块。
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      // 每个规则可以分为三部分 1.条件 2.结果 3.嵌套规则
+    ]
+  }
+}
 ```
