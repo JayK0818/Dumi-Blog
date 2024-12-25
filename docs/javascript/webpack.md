@@ -508,8 +508,38 @@ print('hello world')
 ```js
 module.exports = {
   module: {
+    noParse: /jquery|lodash/, // 防止webpack解析这些文件。
     rules: [
       // 每个规则可以分为三部分 1.条件 2.结果 3.嵌套规则
+      {
+        test: /\.css$/,
+        oneOf: [ // 当规则匹配时, 只使用第一个匹配的规则
+          {
+            resourceQuery: /inline/,
+            use: 'url-loader'
+          }
+        ]
+      },{
+        test: /\.png$/,
+        type: 'asset/resource',
+        generator: { // 对指定的资源模式指定 publicPath
+          publicPath: 'assets/', // url('./abc.png')---> 加载 assets/abc.png 
+          filename: 'static/[hash:12][ext]', // 打包时生成的文件名
+        }
+      },
+      {
+        type: 'asset',
+        type: 'asset/resource',
+        type: 'asset/inline',
+        // ...
+      },
+      {
+        // 传入多个loaders, 从右向左被应用。
+        use: ['style-loader', {
+          loader: 'css-loader',
+          options: {}
+        }]
+      }
     ]
   }
 }
