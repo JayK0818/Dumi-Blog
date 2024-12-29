@@ -293,6 +293,8 @@ module.exports = {
 
   可以将公共的依赖模块提取到已有的入口chunk中。或者提取到一个新生成的chunk.
 
+  默认情况下, 它只会影响到按需加载的chunks, 因为修改initial chunks 会影响到项目的HTML文件中的脚本文件。
+
 ```js
 // webpack.config.js
 module.exports = {
@@ -310,7 +312,21 @@ module.exports = {
   optimization: {
     runtimeChunk: 'single',
     splitChunks: {
-      chunks: 'all'
+      chunks: 'all',
+      cacheGroups: {
+        antd: {
+          name: 'antd-chunk',
+          test: /antd/,
+          priority: 100,
+          // 如果当前chunk包含已经从主bundle中拆分出来的模块, 则它将被重用。
+          reuseExistingChunk: true
+        },
+        vendors: {
+          name: 'vendors-chunk',
+          test: /node_modules/,
+          priority: 90
+        }
+      }
     }
   }
 }
@@ -541,6 +557,37 @@ module.exports = {
         }]
       }
     ]
+  }
+}
+```
+
+## 优化
+
+### optimization.chunkIds
+
+  告知webpack当选择模块 id 时 需要使用哪种算法。开发环境 **optimization.chunkIds** 会被设置为 *named*.
+  生产环境会被设置为 *deterministic*
+
+  开发环境下的chunks 文件名为 src_plugins_plugin-a_js.js / src_plugins_plugin-b_js.js。而在生产环境下则为
+  570.js / 571.js
+
+### optimization.minimize
+
+  告知webpack 使用 TerserPlugin 或其他在 **optimization.minimizer** 定义的插件压缩 bundle.
+
+```js
+module.exports = {
+  minimize: true,
+  minimizer: [
+    new CssMinimizerPlugin(),
+    new TerserPlugin()
+  ],
+  optimization: {
+    removeEmptyChunks: true, // 如果chunk为空, 告知webpack移除这些chunk.
+    // 会为每个入口添加一个只含有runtime的额外chunk.
+    runtimeChunk: 'single',
+    chunkIds: 'named',
+    moduleIds: 'named' // 模块id的算法
   }
 }
 ```
