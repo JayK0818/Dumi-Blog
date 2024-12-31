@@ -324,7 +324,7 @@ module.exports = {
 }
 ```
 
-### sass-loader
+## sass-loader
 
   加载sass/scss文件并编译为css.
 

@@ -6,6 +6,10 @@ group:
 
 ## 入口
 
+```shell
+npm install --save-dev webpack
+```
+
   --config 可以指定配置文件, 默认配置文件 webpack.config.js
 
 ```json
@@ -171,7 +175,11 @@ module.exports = {
         use:['style-loader', 'css-loader']
       }
     ]
-  }
+  },
+  externals: {
+    jquery: 'jQuery', // 从bundle中排出依赖。
+  },
+  externals: /^(jquery|\$)$/i // 使用正则匹配
 }
 ```
 
@@ -406,22 +414,19 @@ import(/*webpackPrefetch: true*/ './main.js').then(fn => {
 
   在介绍 hash 之前先介绍一下 contenthash fullhash 和 chunkhash 之间的区别
 
-### fullhash
+* **fullhash**
 
   如果使用hash的话, 每次修改任何一个文件, 所有打包生成的文件名hash都会改变, 所以一旦修改了任何一个文件, 整个项目的缓存都将失效。
 
-### chunkhash
+* **chunkhash**
 
   chunkhash是根据不同的入口文件进行依赖文件解析,构建对应的chunk。生成对应的hash值。将上面的demo文件名改为 chunkhash 再次打包:
-
   不同的bundle 的hash值不一致, 但是css文件是作为模块引入到Javascript中的, 所以对应的css文件hash 和 bundle.js hash值一致。
-
   这样就产生了一个问题：如果仅修改js文件 但是不修改css文件, 或者只修改css文件 不修改 js文件, 会导致两者的 hash值都发生改变。
 
-### contenthash
+* **contenthash**
 
   contenthash 将根据资源内容创建出唯一 hash。当资源内容发生变化时,contenthash 也会发生变化。
-
   webpack还提供了一个优化功能,可以使用optimization.runtimeChunk 选项将runtime代码拆分为一个单独的chunk. 将其设置为
   single为所有chunk创建一个runtime bundle.
 
@@ -588,6 +593,26 @@ module.exports = {
     runtimeChunk: 'single',
     chunkIds: 'named',
     moduleIds: 'named' // 模块id的算法
-  }
+  },
 }
 ```
+
+  Tree Shaking是一个术语, 通常用于描述移除JavaScript上下文中的未引用代码(dead-code).它依赖于ES2015模块语法的 静态结构 特性。
+
+```js
+module.exports = {
+  optimization: {
+    usedExports: true // 依赖于 terser去检测语句中的副作用。
+  }
+}
+
+// 一段打包后的代码显示
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+  /* harmony export */ multiple: () => /* binding */ multiple,
+  /* harmony export */
+})
+// 导出但是未使用的 函数 sum
+/* unused harmony export sum */
+```
+
+ 如果所有代码都不包含副作用，我们就可以简单地将该属性标记为 false，来告知 webpack 它可以安全地删除未用到的 export。
