@@ -12,10 +12,11 @@ group:
 
   此loader 允许你使用 Babel 和 webpack 转译JavaScript文件。
 
-```js
-// install
+```shell
 npm install -D babel-loader @babel/core @babel/preset-env
+```
 
+```js
 // webpack.config.js
 module.exports = {
   module: {
@@ -356,3 +357,48 @@ module.exports = {
   }
 }
 ```
+
+## postcss-loader
+
+  使用 postcss处理 CSS
+
+```shell
+npm install --save-dev postcss-loader postcss
+npm install postcss-preset-env --save-dev
+
+# 处理写在JS中的样式
+npm install --save-dev postcss-js
+```
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                parser: 'postcss-js', // 处理js中的样式
+                plugins: [
+                  [
+                    'postcss-preset-env'
+                  ]
+                ]
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+:::info
+postcss-preset-env包含 autoprefixer, 如果使用了 preset 就无需单独添加 autoprefixer
+:::

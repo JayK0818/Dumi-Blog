@@ -208,7 +208,7 @@ module.exports = {
 
 1. asset/inline
 2. asset/resource
-3. asset/source
+3. asset/source:导出资源的源代码. 之前通过使用 **raw-loader** 实现。
 
   默认情况下, asset/resource 模块以 hash|ext|query 文件名发送到输出目录,可以在webpack配置中设置output.assetModuleFilename来修改模板字符串
 
@@ -616,3 +616,13 @@ module.exports = {
 ```
 
  如果所有代码都不包含副作用，我们就可以简单地将该属性标记为 false，来告知 webpack 它可以安全地删除未用到的 export。
+
+```json
+{
+  "sideEffects": false,
+  "sideEffects": ["/./utils/index.js"]
+}
+```
+
+  **sideEffects**更为有效是因为它允许跳过整个模块/文件 和 整个文件子树。
+  **usedExports**依赖于 terser检测语句中的副作用。

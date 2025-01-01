@@ -323,14 +323,17 @@ module.exports = {
 module.exports = {
   plugins: [
     new webpack.EnvironmentPlugin({
-      NODE_ENV: 'development',  // using development
+      NODE_ENV: 'development',  // using development unless process.env.NODE_ENV is defined
       DEBUG: true
+    }),
+    new webpack.EnvironmentPlugin(['NODE_ENV', 'DEBUG'])
+    // this is equivalent to the following...
+    new webpack.EnvironmentPlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+      'process.env.DEBUG': JSON.stringify(process.env.DEBUG)
     })
   ]
 }
-
-// not specifying the environment variable raises an 'EnvironmentPlugin.${key}', 
-// environment variable is undefined error.
 ```
 
 ## LimitChunkCountPlugin
@@ -366,9 +369,7 @@ module.exports = {
 };
 ```
 
-  在没有配置 new webpack.optimize.LimitChunkCountPlugin时 network面板是这样的
-
-  而在配置了限制生成chunk数量时, 点击按钮加载的js文件是下面这样的, 加上主入口chunk, 一共5个
+  在配置了限制生成chunk数量时, 加上主入口chunk, 一共5个
 
 ### MinChunkSizePlugin
 
