@@ -626,3 +626,129 @@ module.exports = {
 
   **sideEffects**更为有效是因为它允许跳过整个模块/文件 和 整个文件子树。
   **usedExports**依赖于 terser检测语句中的副作用。
+
+## webpack-dev-server
+
+```js
+module.exports = {
+  devServer: {
+    static: {
+      // 告知服务器从哪里提供内容,也可以传递一个数组, 提供多个选项
+      directory: path.join(__dirname, 'public')
+    },
+    compress: true, // 利用gzips压缩 public/目录当中的所有内容
+    port: 9000, // 指定端口
+    // 允许可访问的开发服务器白名单
+    allowedHosts: [
+      'host.com',
+      'baidu.com'
+    ],
+    client: {
+      logging: 'warn', // 浏览器中设置日志级别。
+      overlay: true,
+      overlay: {
+        errors: true,
+        warnings: false
+      },
+      progress: true, //在浏览器中显示编译进度
+    }，
+    https: true, //使用https提供服务
+    historyApiFallback: true,
+    /**
+     * When using HTML5 History API, the index.html page will likely have to be served in
+     * place of any 404 responses.
+    */
+   host: '0.0.0.0',
+   hot: true, // 启用webpack的热模块替换
+   onAfterSetupMiddleware: function (devServer) {
+    devServer.app.get('/api/v1/todos', (res, res) => {
+        res.json({
+          code: 1,
+          msg: 'success',
+          data: []
+        })
+      })
+    },
+    open: true,  // 在服务启动后自动打开浏览器
+    // 开发服务使用 http-proxy-middleware
+    proxy: {
+      '/api': 'http://xxx:3000',
+      '/api': {
+        target: 'http://localhost:3000',
+        pathRewrite: {
+          '^/api': ''
+        },
+        // 如果不想代理所有内容, 可以提供一个函数
+        bypass: (req, res, proxyOptions) {
+
+        }
+      }
+    },
+    proxy: [ // 多个特定路径代理到同一个目标
+      {
+        context: ['/auth', '/api'],
+        target: 'https://localhost:3000'
+      }
+    ],
+    server: 'http', // https
+  }
+}
+```
+
+## Vue/React
+
+```js
+// webpack.config.js
+const path = require('node:path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { VueLoaderPlugin } = require('vue-loader')
+
+// vue
+module.exports = {
+ mode: 'development',
+ entry: path.join(__dirname, './src/vue/index.js'),
+ output: {
+  path: path.join(__dirname, 'dist'),
+  filename: '[name].[contenthash].js'
+ },
+ module: {
+  rules: [
+   {
+    test: /\.vue$/,
+    use: ['vue-loader']
+   }
+  ]
+ },
+ plugins: [new HtmlWebpackPlugin(), new VueLoaderPlugin()]
+}
+
+// react
+module.exports = {
+ mode: 'development',
+ entry: path.join(__dirname, './src/react/index.jsx'),
+ output: {
+  path: path.join(__dirname, 'dist'),
+  filename: '[name].[contenthash].js'
+ },
+ module: {
+  rules: [
+   {
+    test: /\.jsx$/,
+    exclude: /node_modules/,
+    use: [
+     {
+      loader: 'babel-loader',
+      options: {
+       presets: ['@babel/preset-env', '@babel/preset-react']
+      }
+     }
+    ]
+   }
+  ]
+ },
+ plugins: [
+  new HtmlWebpackPlugin()
+ ]
+}
+
+```
