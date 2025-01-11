@@ -48,3 +48,203 @@ function fibonacci(n = 0) {
 }
 console.log(fibonacci(100))
 ```
+
+## 平铺数组
+
+```js
+const array_flat = (list = []) => {
+  let ret = []
+  for (const item of list) {
+    if (Array.isArray(item)) {
+      ret = ret.concat(array_flat(item))
+    } else {
+      ret.push(item)
+    }
+  }
+  return ret
+}
+const list = [1, 2, 3, [1, 2, [1, 2, 3, [4, 5, [6, 7, [10, 11, [20]]]]]]]
+console.log(array_flat(list))
+// [1, 2, 3, 1, 2, 1, 2, 3, 4, 5, 6, 7, 10, 11, 20]
+
+
+
+ // 使用reduce
+const array_reduce_flat = (list = []) => {
+return list.reduce(
+  (p, n) => p.concat(Array.isArray(n) ? array_reduce_flat(n) : n),
+  []
+)
+}
+console.log(array_reduce_flat(list))
+// [1, 2, 3, 1, 2, 1, 2, 3, 4, 5, 6, 7, 10, 11, 20]
+```
+
+## 平铺数组中对象
+
+```js
+const list = [
+  {
+   id: 1,
+   name: '衣服',
+   children: [
+    {
+     parent_id: 1,
+     id: 11,
+     name: '上衣'
+    },
+    {
+     parent_id: 1,
+     id: 12,
+     name: '裤子',
+     children: [
+      {
+       id: 121,
+       parent_id: 12,
+       name: '牛仔裤',
+       children: [
+        {
+         parent_id: 121,
+         id: 1211,
+         name: '春夏(牛仔裤)'
+        },
+        {
+         parent_id: 121,
+         id: 1222,
+         name: '春秋(牛仔裤)'
+        }
+       ]
+      },
+      {
+       id: 122,
+       parent_id: 12,
+       name: '休闲裤'
+      }
+     ]
+    }
+   ]
+  },
+  {
+   id: 2,
+   name: '手机',
+   children: [
+    {
+     parent_id: 2,
+     id: 21,
+     name: '华为',
+     children: [
+      {
+       id: 211,
+       parent_id: 21,
+       name: '红色'
+      },
+      {
+       id: 212,
+       parent_id: 21,
+       name: '白色'
+      }
+     ]
+    },
+    {
+     parent_id: 2,
+     id: 22,
+     name: '苹果'
+    }
+   ]
+  }
+ ]
+
+const ret = []
+const flat_list = (list = []) => {
+  for (const item of list) {
+    ret.push(item)
+    if (Array.isArray(item.children) && item.children.length) {
+    flat_list(item.children)
+    }
+  }
+  ret.forEach((item) => {
+    Reflect.deleteProperty(item, 'children')
+  })
+  return ret
+}
+console.log(flat_list(list))
+/**
+ *
+[
+  {
+    "id": 1,
+    "name": "衣服"
+  },
+  {
+    "parent_id": 1,
+    "id": 11,
+    "name": "上衣"
+  },
+  {
+    "parent_id": 1,
+    "id": 12,
+    "name": "裤子"
+  },
+  {
+    "id": 121,
+    "parent_id": 12,
+    "name": "牛仔裤"
+  },
+  {
+    "parent_id": 121,
+    "id": 1211,
+    "name": "春夏(牛仔裤)"
+  },
+  {
+    "parent_id": 121,
+    "id": 1222,
+    "name": "春秋(牛仔裤)"
+  },
+  {
+    "id": 122,
+    "parent_id": 12,
+    "name": "休闲裤"
+  },
+  {
+    "id": 2,
+    "name": "手机"
+  },
+  {
+    "parent_id": 2,
+    "id": 21,
+    "name": "华为"
+  },
+  {
+    "id": 211,
+    "parent_id": 21,
+    "name": "红色"
+  },
+  {
+    "id": 212,
+    "parent_id": 21,
+    "name": "白色"
+  },
+  {
+    "parent_id": 2,
+    "id": 22,
+    "name": "苹果"
+  }
+]
+*/
+
+// 将上述拉平的数组 转化为树
+const transform_list = (list = [], parent_id = 0) => {
+  const ret = []
+  for (const item of list) {
+    if (item.parent_id === parent_id) {
+      // 以当前项的id作为父节点, 寻找它的子集
+      const children = transform_list(list, item.id)
+      if (children.length) {
+        item.children = children
+      }
+      ret.push(item)
+    }
+  }
+  return ret
+}
+```
