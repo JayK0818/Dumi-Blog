@@ -11,6 +11,10 @@ export default defineConfig({
       {
         title: 'Node',
         link: '/node'
+      },
+      {
+        title: '案例',
+        link: '/demo'
       }
     ],
     lastUpdated: true,

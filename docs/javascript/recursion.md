@@ -231,7 +231,11 @@ console.log(flat_list(list))
   }
 ]
 */
+```
 
+## 将数组转为树
+
+```js
 // 将上述拉平的数组 转化为树
 const transform_list = (list = [], parent_id = 0) => {
   const ret = []
@@ -246,5 +250,37 @@ const transform_list = (list = [], parent_id = 0) => {
     }
   }
   return ret
+}
+const build_tree = (list = [], parent_id = 0) => {
+  return list
+   .filter((item) => item.parent_id === parent_id)
+   .map((item) => {
+    return {
+     ...item,
+     children: build_tree(list, item.id)
+    }
+  })
+}
+
+ // 通过map转换
+const transform_list_base_map = (list = []) => {
+  const map = {}
+  for (const item of list) {
+   map[item.id] = {
+    ...item,
+    children: []
+   }
+  }
+  const tree = []
+  for (const id in map) {
+  // 判断当前项父级id 项是否存在, 存在的话 加入其父级children
+   const parent_id = map[id].parent_id
+   if (parent_id) {
+    map[parent_id].children.push(map[id])
+   } else {
+    tree.push(map[id])
+   }
+  }
+  return tree
 }
 ```

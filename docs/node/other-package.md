@@ -222,3 +222,7 @@ const stream = rfs.createStream(generator, {
 [unplugin-auto-import](https://www.npmmirror.com/package/unplugin-auto-import) Register global imports on demand for vite and webpack
 
 [mongo-express](https://github.com/mongo-express/mongo-express) A web-based MongoBD admin interface written with Node.js Express, and Bootstrap 5
+
+[webpack-pwa-manifest](https://www.npmmirror.com/package/webpack-pwa-manifest) Progressive Web Application Manifest Generator.
+
+[workbox-webpack-plugin](https://www.npmmirror.com/package/workbox-webpack-plugin?version=7.3.0) A plugin for your webpack build process, helping you generate a manifest of local files that workbox-sw should precache

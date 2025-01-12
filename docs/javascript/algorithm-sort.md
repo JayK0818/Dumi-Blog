@@ -60,11 +60,9 @@ const insert_sort = (array = []) => {
 
 ## 归并排序
 
+  归并排序的核心思想是将一个数组分成两个或多个子数组，对每个子数组进行排序，然后将排序好的子数组合并成一个最终的有序数组。
+
 ```js
-/**
- * @description 归并排序, 将数组分为两部分, 递归排序,然后合并两个部分
- * N(log(N))
-*/
 function merge(left = [], right = []) {
   const arr = []
   while (left.length && right.length) {
@@ -87,12 +85,15 @@ function mergeSort(arr) {
 }
 ```
 
+  时间复杂度O(N log(N)), 空间复杂度O(N)
+
 ## 快速排序
 
+  快速排序采用的是分治思想，即在一个无序的序列中选取一个任意的基准元素pivot，利用pivot将待排序的序列分成两部分
+  前面部分元素均小于或等于基准元素，后面部分均大于或等于基准元素，然后采用递归的方法分别对前后两部分重复上述操作，
+  直到将无序序列排列成有序序列
+
 ```js
-/**
- * @description 快速排序
-*/
 const quick_sort = (array = []) => {
   const length = array.length
   if (length <= 2) return array
@@ -112,19 +113,16 @@ const quick_sort = (array = []) => {
 }
 ```
 
+  时间复杂度O(nlogn), 空间复杂度O(logn)
+
 ## 选择排序
 
+  选择排序（Selection sort）是一种简单直观的排序算法。它的工作原理是：第一次从待排序的数据元素中选出最小（或最大）的一个元素，
+  存放在序列的起始位置，然后再从剩余的未排序元素中寻找到最小（大）元素，然后放到已排序的序列的末尾。以此类推，直到全部待排序的数据
+  元素的个数为零。
+
 ```js
-/**
- * @description 选择排序
- * 遍历数组, 每次在当前的index上,找到剩余数组中最小值的索引。然后进行 值交换
-*/
 const select_sort = (array = []) => {
-/*   const swap = (array, i, j) => {
-    const v1 = array[j]
-    array[j] = array[i]
-    array[i] = v1
-  } */
   const swap = (array, i, j) => {
     [array[i], array[j]] = [array[j], array[i]]
   }
@@ -142,3 +140,5 @@ const select_sort = (array = []) => {
   return array
 }
 ```
+
+  时间复杂度 O(N^2), 空间复杂度 O(1)
