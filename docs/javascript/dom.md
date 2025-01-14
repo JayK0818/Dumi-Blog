@@ -9,6 +9,12 @@ group:
   文档对象模型（DOM）是 web 上构成文档结构和内容的对象的数据表示。DOM不是JavaScript语言的一部分。而是用于建立网站的Web API.
   DOM被设计成与特定编程语言相独立。
 
+## HTML到DOM
+
+  1. 字节流解码
+  2. 输入流预处理 (将字符数据进行统一格式化)
+  3. 令牌化: 将字符数据转换为令牌(Token), 解析HTML生成 DOM树 (匹配到字符 <, 进入 *标签打开状态*, 匹配到字符 /, 进入*标签结束状态*)
+
 ## Node.nodeType
 
   只读属性 **nodeType** 表示该节点的类型。可用来区分不同类型的节点
@@ -373,6 +379,13 @@ console.log(inherit_node(document))
 ## Node.contains()
 
   **Node.contains()** 方法返回一个布尔值, 表示一个节点是否是给定节点的后代, 即该节点本身, 直接子节点, 子节点的后代等。
+
+```js
+const ele = document.getElementById('dropdown')
+const handle_click = (event) => {
+  console.log(ele?.contains(event.target))
+}
+```
 
 ## Element.attributes
 

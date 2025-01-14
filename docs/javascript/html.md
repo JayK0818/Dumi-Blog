@@ -52,6 +52,19 @@ group:
   type="image/png" />
 ```
 
+  样式文件管理模式/目录结构
+
+* base 模版代码
+* components  组件相关样式
+* layout      布局相关
+* pages       页面相关
+* themes      主题样式
+* vendors     第三方样式文件
+
+  CSS类名命名推荐: BEM (Block, Element, Modifier)
+
+  工具命名: Css-Modules
+
 ### disabled
 
   仅对于 *rel="stylesheet"*而言, disabled 布尔属性表示是否应该加载所述样式表并将其应用于文档。

@@ -376,6 +376,8 @@ window.addEventListener('hashchange', () => {
 
   window.navigator会返回一个navigator对象的引用。可以用于请求运行当前代码的应用程序的相关信息。
 
+### 检测设备类型难过
+
 ```js
 // 检测浏览器
 function get_browser() {
@@ -392,6 +394,8 @@ const urgent = get_browser()
 // 一个检测浏览器的第三方库 ua-parser-js
 ```
 
+### 检测网络
+
 ```js
 window.navigator.onLine //检测是否有网络(true/false)
 
@@ -403,6 +407,8 @@ window.addEventListener('offline', () => {
   console.log('offline', window.navigator.onLine) // offline false
 })
 ```
+
+### 复制/黏贴
 
 ```js
 // navigator.clipboard 
